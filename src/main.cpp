@@ -179,20 +179,22 @@ void setup(void) {
 }
 
 void loop(void) {
-  server.handleClient();
-  MDNS.update();
- // Serial.println("przed http requestem");
+
+  
+//   server.handleClient();
+//   MDNS.update();
+//  // Serial.println("przed http requestem");
 
 
    
 
-  if (millis() - lastConnectionTime > postInterval) {
-    Serial.println("10 sekund");
-    // note the time that the connection was made:
-    lastConnectionTime = millis();
-    makehttpRequest();
-  }
- //  Serial.println("po http requestem");
+//   if (millis() - lastConnectionTime > postInterval) {
+//     Serial.println("10 sekund");
+//     // note the time that the connection was made:
+//     lastConnectionTime = millis();
+//     makehttpRequest();
+//   }
+//  //  Serial.println("po http requestem");
 }
 
 bool wathering(){
