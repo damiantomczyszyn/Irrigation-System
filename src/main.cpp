@@ -7,41 +7,44 @@
 #include <WiFiUdp.h>
 #include <ArduinoJson.h>
 #include <HTTPClient.h>
+#include <DHT.h>//biblioteka do DHT
 
-
-#include <DHT.h>
+//---------------------------------------
 #define DHTPIN 12   
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
-
 #ifndef STASSID
 #define STASSID "" 
 #define STAPSK ""// TODO ustawić jako zmienna srodowiskowa aby haslo bylo ukryte
 #endif
-
 #define SIGNAL_PIN A0 //wather sensor data pin
-
 #define ZAW1 D0 //zawory
 #define ZAW2 D1 //zawory
 #define ZAW3 D2 //zawory
 #define ZAW4 D3 //zawory
 
-int value = 0; // variable to store the sensor wather value
-
-DHT dht(DHTPIN, DHTTYPE);
-
 const char *ssid = STASSID;
 const char *password = STAPSK;
+//---------------------------------------
+ESP8266WebServer server(80); //serwwer do przyjmowania requestów
+int watherValue = 0; // variable to store the sensor wather value
+String dateAndTime=" ";//date and time init
+DHT dht(DHTPIN, DHTTYPE);//stworzenie obiektu DHT dla wybranych pinów
+WiFiClient client;
+int program=0;//aktualny program podlewania(0-nie wybrany)
+unsigned long  lastWatheringTime = millis(); // sprawdz czy tyle milis się zmieści ile trzeba
+
+
 
 //declare functions
 String getTime();
-String dateAndTime=" ";
+void parseJson(const char * jsonString);
+void makehttpRequest();
+bool wathering();
 //
 
 //weather api
 //https://randomnerdtutorials.com/esp8266-weather-forecaster/
-WiFiClient client;
-void makehttpRequest();
-void parseJson(const char * jsonString);
+
 const char server1[] = "api.openweathermap.org";
 String serverPath="";
 String text;
@@ -56,16 +59,14 @@ const unsigned long postInterval = 10 * 1000;  // posting interval of 10 minutes
  
 
 
-//
 
-ESP8266WebServer server(80);
 
 
 void handleRoot() {
 
   float h = dht.readHumidity();
   float t = dht.readTemperature();
-  value = analogRead(SIGNAL_PIN); // read the analog value from sensor
+  watherValue = analogRead(SIGNAL_PIN); // read the analog value from sensor
 
 
   StreamString temp;
@@ -82,7 +83,8 @@ void handleRoot() {
 <p id=\"default\">1</p>\
 <button id=\"on\">Włącz</button>\
 <button id=\"off\">Wyłącz</button><br>\
-<button id=\"download\">Feature for later</button>");
+<button id=\"p1\">program1</button><br>\
+<button id=\"p2\">program2</button>");
 temp.print("<p>Sensor Value =  ");
   if (isnan(t) || isnan(h)) {
     temp.println("Failed to read from DHT");
@@ -100,7 +102,7 @@ temp.println(getTime());
 
 temp.print("<p>Wather sensor Value =  ");
 
-  temp.println(value);
+  temp.println(watherValue);
 
 temp.println("</p>");
 
@@ -108,6 +110,8 @@ temp.printf("\
 <script>\
     document.getElementById(\"on\").onclick = function () {const zapytanie = new XMLHttpRequest();zapytanie.open(\"GET\", \"/on\");zapytanie.send();};\
     document.getElementById(\"off\").onclick = function () {const zapytanie = new XMLHttpRequest();zapytanie.open(\"GET\", \"/off\");zapytanie.send();};\
+    document.getElementById(\"p1\").onclick = function () {const zapytanie = new XMLHttpRequest();zapytanie.open(\"GET\", \"/codziennie\");zapytanie.send();};\
+    document.getElementById(\"p2\").onclick = function () {const zapytanie = new XMLHttpRequest();zapytanie.open(\"GET\", \"/co2dni\");zapytanie.send();};\
 </script>\
 </body>\
 </html>" );
@@ -115,8 +119,8 @@ temp.printf("\
 
 }
 
-void handleNotFound() {
-  digitalWrite(LED_BUILTIN, 1);
+void handleNotFound() {//http request not handle
+  digitalWrite(LED_BUILTIN, 1);//zgaś leda
   String message = "File Not Found\n\n";
   message += "URI: ";
   message += server.uri();
@@ -132,25 +136,34 @@ void handleNotFound() {
   digitalWrite(LED_BUILTIN, 0);
 }
 
+// SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP
 void setup(void) {
-  pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(13, OUTPUT);
-  digitalWrite(LED_BUILTIN, 0);
+  pinMode(LED_BUILTIN, OUTPUT);//ustawienie leda do świecenia jako output
+  pinMode(ZAW1, OUTPUT);// wyjście dla zaworów
+  pinMode(ZAW2, OUTPUT);// wyjście dla zaworów
+  pinMode(ZAW3, OUTPUT);// wyjście dla zaworów
+  pinMode(ZAW4, OUTPUT);// wyjście dla zaworów
+
+  //-----------------------------------
+  digitalWrite(LED_BUILTIN, 0);//włączenie leda
+
+  //-------------------------------------
   Serial.begin(9600);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   Serial.println("");
-  dht.begin();
+  //dht.begin();
 
 
   // Wait for connection
+  Serial.print("Connecting to wifi: ");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
 
 
-
+//wypisanie adresu
   Serial.println("");
   Serial.print("Connected to ");
   Serial.println(ssid);
@@ -160,34 +173,54 @@ void setup(void) {
 
 
 
-  if (MDNS.begin("esp8266")) { Serial.println("MDNS responder started"); }
+  if (MDNS.begin("esp8266")) { 
+    Serial.println("MDNS responder started"); 
+    }
 
   server.on("/", handleRoot);
+
   server.on("/on", [](){
         digitalWrite(LED_BUILTIN, LOW);                                      //zapal diodę
-        digitalWrite(13, HIGH);   // pin13
+        digitalWrite(ZAW1, HIGH);   // pin13
         server.send(200);   });
   
   server.on("/off", []() {
       digitalWrite(LED_BUILTIN, HIGH);                                        //zgaś diodę
-      digitalWrite(13, LOW); 
+      digitalWrite(ZAW1, LOW); 
       server.send(200);   
   });
+
+
+  server.on("/codziennie", [](){
+        
+      program=1;
+        server.send(200);   });
+  
+  server.on("/co2dni", []() {
+
+      program=2;
+      server.send(200);   
+  });
+  
+
   server.onNotFound(handleNotFound);
   server.begin();
   Serial.println("HTTP server started");
 }
-
+//--------------------------loop loop
 void loop(void) {
 
   
-//   server.handleClient();
-//   MDNS.update();
+  
+  server.handleClient();
+  MDNS.update();
+  delay(500);//czas na odpowiedź
+
+    if(wathering()==true){
+      digitalWrite(LED_BUILTIN, LOW);  
+    }
+
 //  // Serial.println("przed http requestem");
-
-
-   
-
 //   if (millis() - lastConnectionTime > postInterval) {
 //     Serial.println("10 sekund");
 //     // note the time that the connection was made:
@@ -195,11 +228,10 @@ void loop(void) {
 //     makehttpRequest();
 //   }
 //  //  Serial.println("po http requestem");
+
 }
 
-bool wathering(){
-  return false;
-}
+
 
 String getTime(){
 const long utcOffsetInSeconds = 3600;
@@ -265,6 +297,7 @@ void makehttpRequest() {
     while (client.available()) {
       //Serial.println("odczytuje json");
       c = client.read();
+      delay(500);// dodaniee delaya który ma pomóc w odczytaniu całości zanim instrukcje pójdą dalej
       // since json contains equal number of open and close curly brackets, this means we can determine when a json is completely received  by counting
       // the open and close occurences,
       Serial.print(c);
@@ -296,6 +329,10 @@ void makehttpRequest() {
   }
 }
 
+
+
+
+
 //to parse json data recieved from OWM
 void parseJson(const char * jsonString) {
   Serial.println("parsowanie");
@@ -317,7 +354,6 @@ void parseJson(const char * jsonString) {
   // including temperature and humidity for those who may wish to hack it in
   
   String city = root["city"]["name"];
-  
   float tempNow = nowT["main"]["temp"];
   float humidityNow = nowT["main"]["humidity"];
   String weatherNow = nowT["weather"][0]["description"];
@@ -328,9 +364,48 @@ void parseJson(const char * jsonString) {
   Serial.println();
   Serial.print("tempNow: ");
   Serial.println(tempNow);
-
   Serial.print("humidityNow: ");
   Serial.println(humidityNow);
-  
   Serial.println();
+}
+bool wathering(){
+  float h = dht.readHumidity();
+  float t = dht.readTemperature();
+  unsigned long now = millis();
+  watherValue = analogRead(SIGNAL_PIN); // read the analog value from sensor
+  if(program==0)
+  {
+  if (now - lastWatheringTime>1*1000*60)//wiecej niż minute
+  {
+    lastWatheringTime=millis();
+    return true;
+    
+  }
+  return false;
+  }
+  else if (program==1)
+  {
+  if (now - lastWatheringTime>24*1000*60*60)//wiecej niż 24h
+  {
+    lastWatheringTime=millis();
+    return true;
+    
+  }
+  return false;
+  }
+  else if (program==2)
+  {
+  if (now - lastWatheringTime>48*1000*60*60)//wiecej 48h
+  {
+    lastWatheringTime=millis();
+    return true;
+    
+  }
+  return false;
+  }
+  else
+  return false;
+  
+
+
 }
