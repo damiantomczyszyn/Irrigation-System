@@ -21,6 +21,8 @@
 #define ZAW2 D1 //zawory
 #define ZAW3 D2 //zawory
 #define ZAW4 D3 //zawory
+#define ILOSC_ZAWOROW 4
+#define WATHER_SENSOR_UP 0 //stan dla którego czujnik wody wykrył wodę
 
 const char *ssid = STASSID;
 const char *password = STAPSK;
@@ -31,15 +33,26 @@ String dateAndTime=" ";//date and time init
 DHT dht(DHTPIN, DHTTYPE);//stworzenie obiektu DHT dla wybranych pinów
 WiFiClient client;
 int program=0;//aktualny program podlewania(0-nie wybrany)
-unsigned long  lastWatheringTime = millis(); // sprawdz czy tyle milis się zmieści ile trzeba
-
-
+unsigned long  lastWatheringTime = millis(); // sprawdz czy tyle milis się zmieści ile trzeba - czas od ostatniego podlewania
+bool watheringIsOn=false; // czy podlewanie jest aktualnie właczone
+unsigned long  watheringTimeOn= millis(); // czas podlewania dla danego zaworu
+int podlewany=0;//zmienna informująca który zawór jest aktualnie podlewany
+int  tabZaworow[ILOSC_ZAWOROW] = {
+  ZAW1,ZAW2,ZAW3,ZAW4
+};
+constexpr int watherON = 0;// Stan włączenia podlewania
+constexpr int watherOFF = 1;//stan wyłączenia podlewania
+constexpr unsigned long watheringStartupTime = 79200000;//godzina 22 w ms
+unsigned short czas[3] = {0,0,0};
+unsigned long setupTime=0;
+unsigned long czasCzekania;
 
 //declare functions
 String getTime();
 void parseJson(const char * jsonString);
 void makehttpRequest();
 bool wathering();
+void changeWathering();
 //
 
 //weather api
@@ -206,8 +219,24 @@ void setup(void) {
   server.onNotFound(handleNotFound);
   server.begin();
   Serial.println("HTTP server started");
+
+
+  getTime();// zapisz czas
+  //wylicz ile trzeba poczekać do godziny 21 (zobacz czy sie spieszy godzine czy późni)
+  setupTime=czas[0]*60*60*1000+czas[1]*60*1000+czas[2]*1000;// w ms
+  //godzina 22 w ms to -> 79 200 000
+  if(setupTime>watheringStartupTime)// jest już po czasie
+  {
+    czasCzekania= 86400000 - (setupTime-watheringStartupTime)+millis(); // odjąć czas nadwyżki od 24h w ms
+  }
+  else//jest przed czasem
+  {
+    czasCzekania=watheringStartupTime-setupTime+millis(); //dodanie milis startowo aby potem odejmować od aktualnego milis i porównać wartości
+  }
+
 }
 //--------------------------loop loop
+unsigned long oczekiwanie=0;
 void loop(void) {
 
   
@@ -216,9 +245,15 @@ void loop(void) {
   MDNS.update();
   delay(500);//czas na odpowiedź
 
+  if(czasCzekania<=millis())//jeśli już czas to sprawdź czy odpalić test na podlewanie
+{   czasCzekania=86400000+millis();//24h w ms do odjecia jeszcze czas podlewania w przyszlosci #TODO
     if(wathering()==true){
-      digitalWrite(LED_BUILTIN, LOW);  
+      digitalWrite(LED_BUILTIN, LOW);  //tylkko testowo zapal leda
+      unsigned long  watheringTimeOn= millis(); //zapisz czas rozpoczęcia podlewania
     }
+  if(watheringIsOn)
+  changeWathering();
+}
 
 //  // Serial.println("przed http requestem");
 //   if (millis() - lastConnectionTime > postInterval) {
@@ -249,16 +284,19 @@ NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", utcOffsetInSeconds);
   timeClient.begin();
   timeClient.update();
 
-  Serial.print(daysOfTheWeek[timeClient.getDay()]);
-  Serial.print(", ");
-  Serial.print(timeClient.getHours());
-  Serial.print(":");
-  Serial.print(timeClient.getMinutes());
-  Serial.print(":");
-  Serial.println(timeClient.getSeconds());
+  // Serial.print(daysOfTheWeek[timeClient.getDay()]);
+  // Serial.print(", ");
+  // Serial.print(timeClient.getHours());
+  // Serial.print(":");
+  // Serial.print(timeClient.getMinutes());
+  // Serial.print(":");
+  // Serial.println(timeClient.getSeconds());
+
   //Serial.println(timeClient.getFormattedTime());
   dateAndTime=daysOfTheWeek[timeClient.getDay()]+timeClient.getHours()+timeClient.getMinutes()+timeClient.getSeconds();
-
+  czas[0]=timeClient.getHours();
+  czas[1]=timeClient.getMinutes();
+  czas[2]=timeClient.getSeconds();
   return (String)timeClient.getFormattedTime();
 
 }
@@ -368,19 +406,30 @@ void parseJson(const char * jsonString) {
   Serial.println(humidityNow);
   Serial.println();
 }
+
+
+
 bool wathering(){
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
+  //float h = dht.readHumidity();
+  //float t = dht.readTemperature();
   unsigned long now = millis();
   watherValue = analogRead(SIGNAL_PIN); // read the analog value from sensor
+
+  if(watherValue == WATHER_SENSOR_UP)// jeśli jest mokro to nie podlewaj
+  {
+    return false;
+  }
+
   if(program==0)
   {
   if (now - lastWatheringTime>1*1000*60)//wiecej niż minute
   {
     lastWatheringTime=millis();
+    watheringIsOn=true;
     return true;
     
   }
+  watheringIsOn=false;
   return false;
   }
   else if (program==1)
@@ -388,9 +437,11 @@ bool wathering(){
   if (now - lastWatheringTime>24*1000*60*60)//wiecej niż 24h
   {
     lastWatheringTime=millis();
+    watheringIsOn=true;
     return true;
     
   }
+    watheringIsOn=false;
   return false;
   }
   else if (program==2)
@@ -398,14 +449,43 @@ bool wathering(){
   if (now - lastWatheringTime>48*1000*60*60)//wiecej 48h
   {
     lastWatheringTime=millis();
+    watheringIsOn=true;
     return true;
     
   }
+  watheringIsOn=false;
   return false;
   }
-  else
+  else{
+  watheringIsOn=false;
   return false;
   
+  }
+}
 
 
+
+
+void changeWathering(){
+   unsigned long now = millis();
+  if(now - watheringTimeOn>10*1000*60)//10min
+  {
+  if(podlewany==ILOSC_ZAWOROW)//sprawdzay czy to jest ostatni zawor
+    {
+    podlewany=-1;//resetujemy na pierwszy zawór
+    watheringIsOn=false; // wylaczamy flage podlewania
+    digitalWrite(tabZaworow[podlewany], watherOFF);//włączenie podlewania zaworu
+    return ;
+  }
+    podlewany++;//zaczynamy od inkrementu by było na 0 - czyli pierwszy elemeenty tablicy
+    digitalWrite(tabZaworow[podlewany], watherON);//włączenie podlewania zaworu
+    if(podlewany==0)
+    return ;
+    digitalWrite(tabZaworow[podlewany-1], watherOFF);//włączenie podlewania zaworu
+    
+
+  //zmiana zaworu na kolejny(wyłączenie aktualnego i włączenie następnego)
+
+  }
+  
 }
