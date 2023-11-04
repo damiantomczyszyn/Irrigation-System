@@ -1,11 +1,28 @@
 /*********
   Complete project details at https://randomnerdtutorials.com  
+
+  Server station
 *********/
 
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 #include <DHT.h>
+
+
+// Load Wi-Fi library
+#include <ESP8266WiFi.h>
+#include "ESP8266WebServer.h"
+
+
+const char* ssid     = "dhtBMEserver";
+const char* password = "dhtBMEserver#";
+
+ESP8266WebServer server;
+String getWeather();
+
+
+
 /*#include <SPI.h>
 #define BME_SCK 14
 #define BME_MISO 12
@@ -52,74 +69,93 @@ void setup() {
   delayTime = 1000;
 
   Serial.println();
+
+
+
+// wifi part:
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  // Print local IP address and start web server
+  Serial.println("");
+  Serial.println("WiFi connected.");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+
+server.on("/",[](){server.send(200,"text/plain",getWeather());});
+//server.on("/control",toggleLED);
+  
+  server.begin();
 }
+  
+
 
 void loop() { 
   printValues();
-  delay(delayTime);
+  //delay(delayTime);
+  server.handleClient();
 }
 
 void printValues() {
-  Serial.print("Temperature = ");
-  Serial.print(bme.readTemperature());
-  Serial.println(" *C");
-  
-  // Convert temperature to Fahrenheit
-  /*Serial.print("Temperature = ");
-  Serial.print(1.8 * bme.readTemperature() + 32);
-  Serial.println(" *F");*/
-  
-  Serial.print("Pressure = ");
-  Serial.print(bme.readPressure() / 100.0F);
-  Serial.println(" hPa");
-
-  Serial.print("Approx. Altitude = ");
-  Serial.print(bme.readAltitude(SEALEVELPRESSURE_HPA));
-  Serial.println(" m");
-
-  Serial.print("Humidity = ");
-  Serial.print(bme.readHumidity());
-  Serial.println(" %");
-
-  Serial.println();
-
-
-  val=analogRead(A0); // Water Level Sensor output pin connected A0
-  Serial.print("water lewel = ");  // See the Value In Serial Monitor
-  Serial.println(val);  // See the Value In Serial Monitor
-  Serial.println();
-
-
-
-
-
-// Read Humidity
-h = dht.readHumidity();
-// if humidity read failed, don't change h value 
-if (isnan(h)) {
-   Serial.println("Failed to read from DHT sensor!");
-}
-else {
-   Serial.print("Humidity dht = ");  // See the Value In Serial Monitor
-  Serial.println(h);
-}
-
-
-t = dht.readTemperature();
-// if humidity read failed, don't change h value 
-if (isnan(t)) {
-   Serial.println("Failed to read from DHT sensor!");
-}
-else {
-  Serial.print("temperature dht = ");  // See the Value In Serial Monitor
-  Serial.println(t);
-}
+ 
+Serial.println(getWeather());  
 Serial.println("**************************************************");
 Serial.println();
 
 
+ 
+}
+
+String getWeather(){
+  String weatherS="";
+  weatherS+="Temperature = ";
+  weatherS+=bme.readTemperature();
+  weatherS+=" *C";
+    
+  weatherS+="Pressure = ";
+  weatherS+=bme.readPressure() / 100.0F;
+  weatherS+=" hPa";
+
+  weatherS+="Approx. Altitude = ";
+  weatherS+=bme.readAltitude(SEALEVELPRESSURE_HPA);
+  weatherS+=" m";
+
+  weatherS+="Humidity = ";
+  weatherS+=bme.readHumidity();
+  weatherS+=" %";
+
+  weatherS+="\n";
+
+  val=analogRead(A0); // Water Level Sensor output pin connected A0
+  weatherS+="water lewel = ";  // See the Value In Serial Monitor
+  weatherS+=val;  // See the Value In Serial Monitor
+  weatherS+="\n";
+
+
+h = dht.readHumidity();
+  weatherS+="Humidity = ";
+if (isnan(h)) {
+   weatherS+="err";
+}
+else {
+   weatherS+=h;
+}
+
+
+t = dht.readTemperature();
+weatherS+="temperature = ";
+if (isnan(t)) {
+   weatherS+="err";
+}
+else {
+  weatherS+=t;
+}
+
 
   
-
-  
+return weatherS;
 }
