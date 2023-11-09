@@ -14,6 +14,16 @@ unsigned long timeInSeconds = 0;
 unsigned long unixTimeInSeconds = 0; // https://www.unixtimestamp.com // 0 to 4,294,967,295 - unsigned long TODO zmiana na string
 void saveTime();
 unsigned long getTime();
+unsigned long getHourTimeInSec();
+unsigned long synchronizeTimeToHourInSec(int sHour);
+void saveLocalTime();
+
+struct tm savedTime;
+
+
+
+
+
 //------------------------End Time Features
 
 void setup(){
@@ -42,6 +52,10 @@ void setup(){
 void loop(){
   delay(1000);
   printLocalTime();
+  saveLocalTime();
+  Serial.print("czas oczekiwania do wlaczenia w s: ");
+  Serial.println(synchronizeTimeToHourInSec(1));
+  
 }
 
 void printLocalTime(){
@@ -80,35 +94,59 @@ void printLocalTime(){
   time(&now);
   Serial.print("Epoch Time: ");
   Serial.println(now);
+  Serial.print("Sekundy: ");
+Serial.println(timeinfo.tm_sec);
+
+Serial.print("Minuty: ");
+Serial.println(timeinfo.tm_min);
+
+Serial.print("Godzina: ");
+Serial.println(timeinfo.tm_hour);
+
+
 }
 
-void saveTime()
-  {
-  struct tm timeinfo;
-  if(!getLocalTime(&timeinfo)){
+void saveLocalTime()
+{
+  
+  if(!getLocalTime(&savedTime)){
     Serial.println("Failed to obtain time");
     return;
   }
 
-  Serial.println("Time variables");
-  char timeHour[3];
-  strftime(timeHour,3, "%H", &timeinfo);
-  Serial.println(timeHour);
-  char timeWeekDay[10];
-  strftime(timeWeekDay,10, "%A", &timeinfo);
-  Serial.println(timeWeekDay);
-  Serial.println();
-  //timeInSeconds = timeHour*3600 ;
   }
 
- // Function that gets current epoch time
-  unsigned long getTime() {
-  time_t now;
-  struct tm timeinfo;
-  if (!getLocalTime(&timeinfo)) {
-    //Serial.println("Failed to obtain time");
-    return(0);
+unsigned long getHourTimeInSec(){
+
+
+   unsigned long currentHour = savedTime.tm_hour;
+   unsigned long currentMin = savedTime.tm_min;
+   unsigned long currentSec = savedTime.tm_sec;
+
+  return currentHour*3600 + currentMin*60 + currentSec;
+
+}
+
+unsigned long synchronizeTimeToHourInSec(int sHour)
+{
+  unsigned long godzinaWSekundach = sHour * 3600;
+  unsigned long aktualnyCzasWSekundach = getHourTimeInSec();
+  unsigned long czasCzekania = 0;
+  unsigned long roznicaCzasu = 0;
+
+  if(aktualnyCzasWSekundach>=godzinaWSekundach) {
+     //Serial.println("opcja1");
+     roznicaCzasu = aktualnyCzasWSekundach - godzinaWSekundach;
+     czasCzekania = 86400 - roznicaCzasu;
+     return czasCzekania;
   }
-  time(&now);
-  return now;
+  else
+  {
+    //Serial.println("opcja2");
+     roznicaCzasu =  godzinaWSekundach - aktualnyCzasWSekundach;
+     czasCzekania = roznicaCzasu;
+     return czasCzekania;
+  }
+    
+ // return 0;
 }
