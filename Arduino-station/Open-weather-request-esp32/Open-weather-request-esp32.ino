@@ -2,8 +2,8 @@
 #include <HTTPClient.h>
 #include <Arduino_JSON.h>
 
-const char* ssid = "dlink";
-const char* password = "tomczyszyn";
+const char* ssid = "x";
+const char* password = "x";
 
 // Your Domain name with URL path or IP address with path
 String openWeatherMapApiKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxx";
