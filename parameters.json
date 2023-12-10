@@ -1,0 +1,18 @@
+{
+    "parameters": {
+      "treeL": [
+        {
+          "godziny": 22,
+          "litry": 2.5,
+          "ostatniePodlewanie": 24
+        }
+      ],
+          "treeR": [
+        {
+          "id": "1",
+          "name": "armor",
+          "type": "Armor"
+        }
+      ]
+    }
+  }
