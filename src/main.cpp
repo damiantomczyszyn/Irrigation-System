@@ -8,6 +8,7 @@
 #include <ArduinoJson.h>
 #include <HTTPClient.h>
 #include <DHT.h>//biblioteka do DHT
+#include "decisionTree.h"
 
 //---------------------------------------
 #define DHTPIN 12   
@@ -234,6 +235,8 @@ void setup(void) {
     czasCzekania=watheringStartupTime-setupTime+millis(); //dodanie milis startowo aby potem odejmować od aktualnego milis i porównać wartości
   }
 
+
+makeWatheringDecision();
 }
 //--------------------------loop loop
 unsigned long oczekiwanie=0;
