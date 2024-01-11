@@ -3,12 +3,12 @@
 
 
 
-//mock up data
+//mock up sensors data
   float h = 10.1;   //humidity
   float t = 25.5;   //temperature
   int   w = 50;     //wather value
 
-//values from  weather api mock up
+//mock up values from weather api 
   float temperature = 33.4;
   float pressure = 100; 
   float humidity = 30;
@@ -56,19 +56,19 @@ bool cieplejNizStopni(float stopnie)
 
 bool makeWatheringDecision()
 {
-    if( w > czyJestMokro )
+    if( w > czyJestMokro )//1
     {// tak jest mokro
         probabilitySum += 0;
 
-        if (czyPadaloWiecejNiz(0))
+        if (czyPadaloWiecejNiz(0))//2
         {//tak padalo wiecej niz x litrow
             probabilitySum +=0;
         }
-        else
+        else//2
         {//nie padalo wiecej niz x litrow
             probabilitySum +=35;
             
-            if(czasOdOstatniegoPodlewaniaWiekszyNiz(0))
+            if(czasOdOstatniegoPodlewaniaWiekszyNiz(0))//3
             {//tak wiekszy niz x godzin
                 probabilitySum += 35;
             }
@@ -78,21 +78,21 @@ bool makeWatheringDecision()
             }
         }
     }
-    else
+    else//1
     {//nie jest mokro
      probabilitySum += 35;
 
-        if ( czyBedziePadacWCiaguGodzin(0) )
+        if ( czyBedziePadacWCiaguGodzin(0) )//2
         {//tak bedzie padac
         probabilitySum += -20;
        
 
         }
-        else
+        else//2
         {//nie bedzie padac
             probabilitySum +=35;
 
-            if(cieplejNizStopni(0))
+            if(cieplejNizStopni(0))//3
             {//tak cieplej
                 probabilitySum += -25;
             }
@@ -103,7 +103,9 @@ bool makeWatheringDecision()
         }
     }
 
-    if( probabilitySum <= returnRandomInt() )
+
+
+    if( probabilitySum <= returnRandomInt() )// podjęcie decyzji losowo na podstawie prawdopodobieństwa
     {
         return true;
     }
@@ -111,4 +113,5 @@ bool makeWatheringDecision()
     {
     return false;
     }
+
 }
