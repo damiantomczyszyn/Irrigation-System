@@ -14,8 +14,8 @@
 #define DHTPIN 12   
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
 #ifndef STASSID
-#define STASSID "dlink" // wifi name
-#define STAPSK "tomczyszyn"// wifi password
+#define STASSID "" // wifi name
+#define STAPSK ""// wifi password
 #endif
 #define SIGNAL_PIN A0 //wather sensor data pin
 #define ZAW1 D0 //zawory
@@ -236,7 +236,7 @@ void setup(void) {
   }
 
 
-makeWatheringDecision();
+
 }
 //--------------------------loop loop
 unsigned long oczekiwanie=0;
@@ -250,7 +250,9 @@ void loop(void) {
 
   if(czasCzekania<=millis())//jeśli już czas to sprawdź czy odpalić test na podlewanie
 {   czasCzekania=86400000+millis();//24h w ms do odjecia jeszcze czas podlewania w przyszlosci #TODO
-    if(wathering()==true){
+    //if(wathering()==true){
+    if(makeWatheringDecision()==true)// czy właczyć podlewanie czy nie z drzewa
+    {
       digitalWrite(LED_BUILTIN, LOW);  //tylkko testowo zapal leda
       unsigned long  watheringTimeOn= millis(); //zapisz czas rozpoczęcia podlewania
     }
@@ -258,14 +260,14 @@ void loop(void) {
   changeWathering();
 }
 
-//  // Serial.println("przed http requestem");
-//   if (millis() - lastConnectionTime > postInterval) {
-//     Serial.println("10 sekund");
-//     // note the time that the connection was made:
-//     lastConnectionTime = millis();
-//     makehttpRequest();
-//   }
-//  //  Serial.println("po http requestem");
+  Serial.println("przed http requestem");
+  if (millis() - lastConnectionTime > postInterval) {
+    Serial.println("10 sekund");
+    // note the time that the connection was made:
+    lastConnectionTime = millis();
+    makehttpRequest();
+  }
+    Serial.println("po http requestem");
 
 }
 
