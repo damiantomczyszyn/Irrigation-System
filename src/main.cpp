@@ -14,8 +14,8 @@
 #define DHTPIN 12   
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
 #ifndef STASSID
-#define STASSID "" 
-#define STAPSK ""// TODO ustawić jako zmienna srodowiskowa aby haslo bylo ukryte
+#define STASSID "dlink" // wifi name
+#define STAPSK "tomczyszyn"// wifi password
 #endif
 #define SIGNAL_PIN A0 //wather sensor data pin
 #define ZAW1 D0 //zawory
