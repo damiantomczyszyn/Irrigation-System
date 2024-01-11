@@ -54,7 +54,7 @@ void handleRoot() {
 
   float h = dht.readHumidity();
   float t = dht.readTemperature();
-  delay(100);
+
   watherValue = analogRead(SIGNAL_PIN); // read the analog value from sensor
 
 
