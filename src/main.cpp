@@ -14,8 +14,8 @@
 #define DHTPIN 12   
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
 #ifndef STASSID
-#define STASSID "" // wifi name
-#define STAPSK ""// wifi password
+#define STASSID "dlink" // wifi name
+#define STAPSK "tomczyszyn"// wifi password
 #endif
 #define SIGNAL_PIN A0 //wather sensor data pin
 #define ZAW1 D0 //zawory
@@ -59,8 +59,8 @@ void changeWathering();
 //weather api
 //https://randomnerdtutorials.com/esp8266-weather-forecaster/
 
-const char server1[] = "api.openweathermap.org";
-String serverPath="";
+const char server1[] = "http://api.openweathermap.org";
+String serverPath="http://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,minutely&appid=3db715609a637e8a4ba3f94c421dc703";
 String text;
 int jsonend = 0;
 boolean startJson = false;
@@ -236,6 +236,14 @@ void setup(void) {
   }
 
 
+    Serial.println("przed http requestem");
+  if (millis() - lastConnectionTime > postInterval) {
+    Serial.println("10 sekund");
+    // note the time that the connection was made:
+    lastConnectionTime = millis();
+    makehttpRequest();
+  }
+    Serial.println("po http requestem");
 
 }
 //--------------------------loop loop
@@ -260,14 +268,6 @@ void loop(void) {
   changeWathering();
 }
 
-  Serial.println("przed http requestem");
-  if (millis() - lastConnectionTime > postInterval) {
-    Serial.println("10 sekund");
-    // note the time that the connection was made:
-    lastConnectionTime = millis();
-    makehttpRequest();
-  }
-    Serial.println("po http requestem");
 
 }
 
