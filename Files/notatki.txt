@@ -1,10 +1,10 @@
 - Co jakiś czas driver się resetuje i trzeba go instalować na nowo: CH340G driver install
 * Dodać włączanie manualne i wyłączanie każdego zaworu
-* Dodać system decyzyjny na podstawie api i aktualnej wartości czujnika.
-* Czujniki domyślnie są wyłączone. Włączają się gdy:
-    - ma być włączane podlewanie(pomiar w celu sprawdzenia czy nie jest mokro lub za gorąco)
-    - Odpowiadasz na request załadowania/przeładowania stronki. (może kiedyś będzie wspierało ajax, a nie przeładowania i auto odświerzania)
-    - 
+* Czujniki będą w stacji pogodowej na oddzielnym MCU.
+* Komunikacja będzie się odbywała poprzez wysłanie requesta get i pobranie parametrów z servera http.
+* System decyzyjny znajduje się w pliku decisionTree.cpp
+* Odczytanie i wyłuskanie elementów z api będzie się odbywało w głównym kodzie programu.
+* Można go będzie rozbić na więcej plików źródłowych, aby zmniejszyć maina.
 
 
 
