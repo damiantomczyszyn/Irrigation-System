@@ -77,7 +77,7 @@ DeserializationError error = deserializeJson(doc2, jsonString);
 
 
 void printDayInfo(JsonObject day, int dayNumber);//deklaracja
-
+void getDataFromStation();
 
 
 void handleRoot() {
@@ -237,7 +237,7 @@ void setup(void)
     printDayInfo(days, x + 1);
   }
 
-
+  getDataFromStation();
 
   server.on("/", handleRoot);
   server.on("/on", [](){
@@ -312,7 +312,6 @@ void loop(void) {
 
 }
 
-
 String getTime(){
 const long utcOffsetInSeconds = 3600;
 
@@ -353,7 +352,6 @@ NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", utcOffsetInSeconds);
   return (String)timeClient.getFormattedTime();
 
 }
-
 
 void changeWathering(){
    unsigned long now = millis();
@@ -419,4 +417,53 @@ void printDayInfo(JsonObject day, int dayNumber) {
   Serial.println("Sunrise: " + String(sunrise));
   Serial.println("Sunset: " + String(sunset));
   Serial.println();
+}
+
+void getDataFromStation(){
+  //Your Domain name with URL path or IP address with path
+String serverName = "http://192.168.101.76";
+
+// the following variables are unsigned longs because the time, measured in
+// milliseconds, will quickly become a bigger number than can be stored in an int.
+unsigned long lastTime = 0;
+// Timer set to 10 minutes (600000)
+//unsigned long timerDelay = 600000;
+// Set timer to 5 seconds (5000)
+unsigned long timerDelay = 5000;
+
+    //Send an HTTP POST request every 10 minutes
+  if ((millis() - lastTime) > timerDelay) {
+    //Check WiFi connection status
+    if(WiFi.status()== WL_CONNECTED){
+      HTTPClient http;
+      WiFiClient client; // Utwórz obiekt WiFiClien
+      String serverPath = serverName;
+      
+      // Your Domain name with URL path or IP address with path
+      http.begin(client, serverPath.c_str());
+      
+      // If you need Node-RED/server authentication, insert user and password below
+      //http.setAuthorization("REPLACE_WITH_SERVER_USERNAME", "REPLACE_WITH_SERVER_PASSWORD");
+      
+      // Send HTTP GET request
+      int httpResponseCode = http.GET();
+      Serial.println("wykonanie get do servera http");
+      if (httpResponseCode>0) {
+        Serial.print("HTTP Response code: ");
+        Serial.println(httpResponseCode);
+        String payload = http.getString();
+        Serial.println(payload);
+      }
+      else {
+        Serial.print("Error code: ");
+        Serial.println(httpResponseCode);
+      }
+      // Free resources
+      http.end();
+    }
+    else {
+      Serial.println("WiFi Disconnected");
+    }
+    lastTime = millis();
+  }
 }
