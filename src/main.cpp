@@ -7,31 +7,27 @@
 #include <WiFiUdp.h>
 #include <ArduinoJson.h>
 #include <HTTPClient.h>
-#include <DHT.h>//biblioteka do DHT
 #include "decisionTree.h"
 
 //---------------------------------------
-#define DHTPIN 12   
-#define DHTTYPE DHT22   // DHT 22  (AM2302)
+
 #ifndef STASSID
 #define STASSID "dlink" // wifi name
 #define STAPSK "tomczyszyn"// wifi password
 #endif
-#define SIGNAL_PIN A0 //wather sensor data pin
 #define ZAW1 D0 //zawory
 #define ZAW2 D1 //zawory
 #define ZAW3 D2 //zawory
 #define ZAW4 D3 //zawory
 #define ILOSC_ZAWOROW 4
-#define WATHER_SENSOR_UP 0 //stan dla którego czujnik wody wykrył wodę
+
 
 const char *ssid = STASSID;
 const char *password = STAPSK;
 //---------------------------------------
 ESP8266WebServer server(80); //serwwer do przyjmowania requestów
-int watherValue = 0; // variable to store the sensor wather value
 String dateAndTime=" ";//date and time init
-DHT dht(DHTPIN, DHTTYPE);//stworzenie obiektu DHT dla wybranych pinów
+
 WiFiClient client;
 int program=0;//aktualny program podlewania(0-nie wybrany)
 unsigned long  lastWatheringTime = millis(); // sprawdz czy tyle milis się zmieści ile trzeba - czas od ostatniego podlewania
@@ -50,22 +46,16 @@ unsigned long czasCzekania;
 
 //declare functions
 String getTime();
-void parseJson(const char * jsonString);
-void makehttpRequest();
-bool wathering();
 void changeWathering();
 //
 
 //weather api
 //https://randomnerdtutorials.com/esp8266-weather-forecaster/
 
-const char server1[] = "http://api.openweathermap.org";
-String serverPath="http://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,minutely&appid=3db715609a637e8a4ba3f94c421dc703";
-String text;
-int jsonend = 0;
-boolean startJson = false;
-int status = WL_IDLE_STATUS;
-#define JSON_BUFF_DIMENSION 2500
+
+
+
+
 unsigned long lastConnectionTime = 0;     // last time you connected to the server, in milliseconds
 const unsigned long postInterval = 10 * 1000;  // posting interval of 10 minutes  (10L * 1000L; 10 seconds delay for testing)
 
@@ -77,11 +67,6 @@ const unsigned long postInterval = 10 * 1000;  // posting interval of 10 minutes
 
 
 void handleRoot() {
-
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
-  watherValue = analogRead(SIGNAL_PIN); // read the analog value from sensor
-
 
   StreamString temp;
   temp.reserve(500);  // Preallocate a large chunk to avoid memory fragmentation
@@ -99,27 +84,9 @@ void handleRoot() {
 <button id=\"off\">Wyłącz</button><br>\
 <button id=\"p1\">program1</button><br>\
 <button id=\"p2\">program2</button>");
-temp.print("<p>Sensor Value =  ");
-  if (isnan(t) || isnan(h)) {
-    temp.println("Failed to read from DHT");
-  } else {
-    temp.print("Humidity: "); 
-    temp.print(h);
-    temp.print(" %\t");
-    temp.print("Temperature: "); 
-    temp.print(t);
-    temp.println(" *C");
-  }
-temp.println("</p>");
+
 temp.println("Time:");
 temp.println(getTime());
-
-temp.print("<p>Wather sensor Value =  ");
-
-  temp.println(watherValue);
-
-temp.println("</p>");
-
 temp.printf("\
 <script>\
     document.getElementById(\"on\").onclick = function () {const zapytanie = new XMLHttpRequest();zapytanie.open(\"GET\", \"/on\");zapytanie.send();};\
@@ -133,8 +100,8 @@ temp.printf("\
 
 }
 
-void handleNotFound() {//http request not handle
-  digitalWrite(LED_BUILTIN, 1);//zgaś leda
+void handleNotFound() {
+  digitalWrite(LED_BUILTIN, 1);//zgaś diodę led
   String message = "File Not Found\n\n";
   message += "URI: ";
   message += server.uri();
@@ -144,13 +111,16 @@ void handleNotFound() {//http request not handle
   message += server.args();
   message += "\n";
 
-  for (uint8_t i = 0; i < server.args(); i++) { message += " " + server.argName(i) + ": " + server.arg(i) + "\n"; }
+  for (uint8_t i = 0; i < server.args(); i++) 
+  { 
+    message += " " + server.argName(i) + ": " + server.arg(i) + "\n"; 
+  }
 
   server.send(404, "text/plain", message);
   digitalWrite(LED_BUILTIN, 0);
 }
 
-// SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP SETUP
+
 void setup(void) {
   pinMode(LED_BUILTIN, OUTPUT);//ustawienie leda do świecenia jako output
   pinMode(ZAW1, OUTPUT);// wyjście dla zaworów
@@ -162,12 +132,10 @@ void setup(void) {
   digitalWrite(LED_BUILTIN, 0);//włączenie leda
 
   //-------------------------------------
-  Serial.begin(9600);
+  Serial.begin(115200);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
-  Serial.println("");
-  //dht.begin();
-
+  Serial.println("");// aby wszystkie przypadkowe znaki po otwarciu Seriala były oddzielone
 
   // Wait for connection
   Serial.print("Connecting to wifi: ");
@@ -241,7 +209,7 @@ void setup(void) {
     Serial.println("10 sekund");
     // note the time that the connection was made:
     lastConnectionTime = millis();
-    makehttpRequest();
+    
   }
     Serial.println("po http requestem");
 
@@ -306,167 +274,8 @@ NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", utcOffsetInSeconds);
 
 }
 
-int difTime(){
-  return 0;
-}
-
-// to request data from OWM
-void makehttpRequest() {
-  // close any connection before send a new request to allow client make connection to server
-  client.stop();
-
-  // if there's a successful connection:
-  if (client.connect(server1, 80)) {
-
-     Serial.println("connecting...");
-    // send the HTTP PUT request:
-
-    client.println("GET " + serverPath);
-    client.println("Host: api.openweathermap.org");
-    client.println("User-Agent: Mozilla/5.0");
-    //client.println("Connection: close");
-    client.println();
-
-    unsigned long timeout = millis();
-    while (client.available() == 0) {
-      if (millis() - timeout > 5000) {
-        Serial.println(">>> Client Timeout !");
-        client.stop();
-        return;
-      }
-    }
-    
-    char c = 0;
-    while (client.available()) {
-      //Serial.println("odczytuje json");
-      c = client.read();
-      delay(500);// dodaniee delaya który ma pomóc w odczytaniu całości zanim instrukcje pójdą dalej
-      // since json contains equal number of open and close curly brackets, this means we can determine when a json is completely received  by counting
-      // the open and close occurences,
-      Serial.print(c);
-      if (c == '{') {
-        startJson = true;         // set startJson true to indicate json message has started
-        jsonend++;
-      }
-      if (c == '}') {
-        jsonend--;
-      }
-      if (startJson == true) {
-        text += c;
-      }
-      // if jsonend = 0 then we have have received equal number of curly braces 
-      if (jsonend == 0 && startJson == true) {
-        Serial.println("json odczytany");
-        parseJson(text.c_str());  // parse c string text in parseJson function
 
 
-        text = "";                // clear text string for the next time
-        startJson = false;        // set startJson to false to indicate that a new message has not yet started
-      }
-    }
-  }
-  else {
-    // if no connction was made:
-    Serial.println("connection failed");
-    return;
-  }
-}
-
-
-
-
-
-//to parse json data recieved from OWM
-void parseJson(const char * jsonString) {
-  Serial.println("parsowanie");
-  //StaticJsonBuffer<4000> jsonBuffer;
-  const size_t bufferSize = 2*JSON_ARRAY_SIZE(1) + JSON_ARRAY_SIZE(2) + 4*JSON_OBJECT_SIZE(1) + 3*JSON_OBJECT_SIZE(2) + 3*JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + 2*JSON_OBJECT_SIZE(7) + 2*JSON_OBJECT_SIZE(8) + 720;
-  DynamicJsonBuffer jsonBuffer(bufferSize);
-
-  // FIND FIELDS IN JSON TREE
-  JsonObject& root = jsonBuffer.parseObject(jsonString);
-  if (!root.success()) {
-    Serial.println("parseObject() failed");
-    return;
-  }
-
-  JsonArray& list = root["list"];
-  JsonObject& nowT = list[0];
-
-
-  // including temperature and humidity for those who may wish to hack it in
-  
-  String city = root["city"]["name"];
-  float tempNow = nowT["main"]["temp"];
-  float humidityNow = nowT["main"]["humidity"];
-  String weatherNow = nowT["weather"][0]["description"];
-
-
-  // checking for four main weather possibilities
-  Serial.println("cokolwiek wypisuję");
-  Serial.println();
-  Serial.print("tempNow: ");
-  Serial.println(tempNow);
-  Serial.print("humidityNow: ");
-  Serial.println(humidityNow);
-  Serial.println();
-}
-
-
-
-bool wathering(){
-  //float h = dht.readHumidity();
-  //float t = dht.readTemperature();
-  unsigned long now = millis();
-  watherValue = analogRead(SIGNAL_PIN); // read the analog value from sensor
-
-  if(watherValue == WATHER_SENSOR_UP)// jeśli jest mokro to nie podlewaj
-  {
-    return false;
-  }
-
-  if(program==0)
-  {
-  if (now - lastWatheringTime>1*1000*60)//wiecej niż minute
-  {
-    lastWatheringTime=millis();
-    watheringIsOn=true;
-    return true;
-    
-  }
-  watheringIsOn=false;
-  return false;
-  }
-  else if (program==1)
-  {
-  if (now - lastWatheringTime>24*1000*60*60)//wiecej niż 24h
-  {
-    lastWatheringTime=millis();
-    watheringIsOn=true;
-    return true;
-    
-  }
-    watheringIsOn=false;
-  return false;
-  }
-  else if (program==2)
-  {
-  if (now - lastWatheringTime>48*1000*60*60)//wiecej 48h
-  {
-    lastWatheringTime=millis();
-    watheringIsOn=true;
-    return true;
-    
-  }
-  watheringIsOn=false;
-  return false;
-  }
-  else{
-  watheringIsOn=false;
-  return false;
-  
-  }
-}
 
 
 
