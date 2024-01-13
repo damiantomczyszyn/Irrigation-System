@@ -1,33 +1,10 @@
 #include "decisionTree.h"
 #include<cstdlib>
+#include <ArduinoJson.h>
 
 
-//mock up data
-  float h = 10.1;   //humidity
-  float t = 25.5;   //temperature
-  int   w = 50;     //wather value
+short probabilitySum = 0;
 
-//values from  weather api mock up
-  float temperature = 33.4;
-  float pressure = 100; 
-  float humidity = 30;
-  float windSpeed = 30;
-  //czas
-
-
-
-  //decision tree params
-  float czyJestMokro = 50;
-  int iloscGodzinDoOpadow1 = 24;
-  float iloscOpadowWLitrach1 = 4;
-  float maksymalnaTemperatura1 = 25;
-  ///----------------------
-  
-  int iloscGodzinDoOpadow2 = 24;
-  float iloscOpadowWLitrach2 = 4;
-  float maksymalnaTemperatura2 = 25;
-  
-  short probabilitySum = 0;
 
 bool czyBedziePadacWCiaguGodzin(int x) 
 {
@@ -53,9 +30,17 @@ bool cieplejNizStopni(float stopnie)
     return true;
 }
 
-bool makeWatheringDecision()
+bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)
 {
-    if( w > czyJestMokro )
+    Serial.println("\nmake wathering decision doc");
+    serializeJsonPretty(doc, Serial);
+    serializeJsonPretty(doc2, Serial);
+
+
+
+
+    //-------------------------
+    if( 1==1 )
     {// tak jest mokro
         probabilitySum += 0;
 

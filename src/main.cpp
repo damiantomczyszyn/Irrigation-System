@@ -2,16 +2,13 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
-//#include <StreamString.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 #include <ArduinoJson.h>
 #include <ESP8266HTTPClient.h>
 #include <WiFiClientSecure.h>
 #include "decisionTree.h"
-
 //---------------------------------------
-
 #ifndef STASSID
 #define STASSID "" // wifi name
 #define STAPSK ""// wifi password
@@ -56,28 +53,18 @@ const unsigned long postInterval = 10 * 1000;  // posting interval of 10 minutes
 
 //web api section
 String getHtmlContent(const char* url);
-void getDataFromStation();
+String getDataFromStation();
 //
-const size_t capacity = JSON_OBJECT_SIZE(900) + 300;
+const size_t capacity = JSON_OBJECT_SIZE(800) + 300;
+
 const char*  serverApi = "weather.visualcrossing.com";  // Server URL
 DynamicJsonDocument doc(capacity);
 WiFiClientSecure clientS;
 String jsonResponse = "";
-const char* jsonString = R"({
-    "Temperature": 25.26,
-    "Pressure": 1000.50,
-    "Altitude": 106.70,
-    "Humidity": 28.79    
-})";
 
-DynamicJsonDocument doc2(200);  
-DeserializationError error = deserializeJson(doc2, jsonString);
+DynamicJsonDocument doc2(150);  
 
 
-
-
-void printDayInfo(JsonObject day, int dayNumber);//deklaracja
-void getDataFromStation();
 
 
 void handleRoot() {
@@ -108,8 +95,6 @@ temp.printf("\
 <script>\
     document.getElementById(\"on\").onclick = function () {const zapytanie = new XMLHttpRequest();zapytanie.open(\"GET\", \"/on\");zapytanie.send();};\
     document.getElementById(\"off\").onclick = function () {const zapytanie = new XMLHttpRequest();zapytanie.open(\"GET\", \"/off\");zapytanie.send();};\
-    document.getElementById(\"p1\").onclick = function () {const zapytanie = new XMLHttpRequest();zapytanie.open(\"GET\", \"/codziennie\");zapytanie.send();};\
-    document.getElementById(\"p2\").onclick = function () {const zapytanie = new XMLHttpRequest();zapytanie.open(\"GET\", \"/co2dni\");zapytanie.send();};\
 </script>\
 </body>\
 </html>" );
@@ -118,7 +103,7 @@ temp.printf("\
 }
 
 void handleNotFound() {
-  digitalWrite(LED_BUILTIN, 1);//zgaś diodę led
+  
   String message = "File Not Found\n\n";
   message += "URI: ";
   message += server.uri();
@@ -145,7 +130,7 @@ void connectAndSave() {
   else {
     Serial.println("Connected to server!");
     // Make a HTTP request:
-    clientS.println("GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Lublin/2024-01-10/2024-01-14?unitGroup=metric&elements=datetime%2Ctempmax%2Ctempmin%2Ctemp%2Cdew%2Chumidity%2Cprecip%2Cprecipprob%2Cpreciptype%2Cwindspeed%2Cwindspeedmax%2Cwindspeedmean%2Cwindspeedmin%2Cpressure%2Ccloudcover%2Cuvindex%2Csunrise%2Csunset&include=fcst%2Cremote%2Cobs%2Cdays&key=&contentType=json HTTP/1.0");
+    clientS.println("GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Lublin/2024-01-10/2024-01-14?unitGroup=metric&elements=datetime%2Ctemp%2Cdew%2Chumidity%2Cprecip%2Cprecipprob%2Cpreciptype%2Cwindspeedmax%2Cwindspeedmean%2Cpressure&include=fcst%2Cremote%2Cobs%2Cdays&key=&contentType=json HTTP/1.0");
     clientS.println("Host: weather.visualcrossing.com");
     clientS.println("Connection: close");
     clientS.println();
@@ -160,14 +145,14 @@ void connectAndSave() {
 
     while (clientS.available()) {
       char c = clientS.read();
-      Serial.write(c);
+     // Serial.write(c);
       if(c=='{')
       {
         jsonResponse = "{";
         while (clientS.available())
         {
                 char c = clientS.read();
-                Serial.write(c);
+           //     Serial.write(c);
           jsonResponse+=c;
         }
       }
@@ -176,7 +161,7 @@ void connectAndSave() {
     clientS.stop();
 
 
-
+  Serial.println(jsonResponse);
   //to json
     deserializeJson(doc, jsonResponse);
       //Serial.println("Estimated memory usage: " + String(measureJson(doc)) + " bytes");
@@ -231,13 +216,12 @@ void setup(void)
     }
 
   connectAndSave();
-  for (int x = 0; x < 5; x++) {
-    // Dostęp do elementów w tablicy "days"
-    JsonObject days = doc["days"][x];
-    printDayInfo(days, x + 1);
-  }
 
-  getDataFromStation();
+
+  String jsonDataString = getDataFromStation();
+  deserializeJson(doc2, jsonDataString);
+
+  makeWatheringDecision(doc,doc2);
 
   server.on("/", handleRoot);
   server.on("/on", [](){
@@ -250,15 +234,7 @@ void setup(void)
       digitalWrite(ZAW1, LOW); 
       server.send(200);   
   });
-  server.on("/codziennie", [](){
-        
-      program=1;
-        server.send(200);   });
-  
-  server.on("/co2dni", []() {
-      program=2;
-      server.send(200);   
-  });
+
   
 
   server.onNotFound(handleNotFound);
@@ -301,7 +277,7 @@ void loop(void) {
   if(czasCzekania<=millis())//jeśli już czas to sprawdź czy odpalić test na podlewanie
 {   czasCzekania=86400000+millis();//24h w ms do odjecia jeszcze czas podlewania w przyszlosci #TODO
     //if(wathering()==true){
-    if(makeWatheringDecision()==true)// czy właczyć podlewanie czy nie z drzewa
+    if(makeWatheringDecision(doc,doc2)==true)// czy właczyć podlewanie czy nie z drzewa
     {
       digitalWrite(LED_BUILTIN, LOW);  //tylkko testowo zapal leda
       unsigned long  watheringTimeOn= millis(); //zapisz czas rozpoczęcia podlewania
@@ -377,88 +353,41 @@ void changeWathering(){
   
 }
 
-void printDayInfo(JsonObject day, int dayNumber) {
-  const char* datetime = day["datetime"];
-  double tempmax = day["tempmax"];
-  double tempmin = day["tempmin"];
-  double temp = day["temp"];
-  double dew = day["dew"];
-  double humidity = day["humidity"];
-  double precip = day["precip"];
-  double precipprob = day["precipprob"];
-  const char* preciptype = day["preciptype"]; // Ostrzeżenie: To pole może być null
-  double windspeed = day["windspeed"];
-  double pressure = day["pressure"];
-  double cloudcover = day["cloudcover"];
-  double uvindex = day["uvindex"];
-  double windspeedmax = day["windspeedmax"];
-  double windspeedmean = day["windspeedmean"];
-  double windspeedmin = day["windspeedmin"];
-  const char* sunrise = day["sunrise"];
-  const char* sunset = day["sunset"];
 
-  Serial.println("Day " + String(dayNumber) + " Info:");
-  Serial.println("Date Time: " + String(datetime));
-  Serial.println("Temp Max: " + String(tempmax));
-  Serial.println("Temp Min: " + String(tempmin));
-  Serial.println("Temp: " + String(temp));
-  Serial.println("Dew: " + String(dew));
-  Serial.println("Humidity: " + String(humidity));
-  Serial.println("Precip: " + String(precip));
-  Serial.println("Precip Prob: " + String(precipprob));
-  Serial.println("Precip Type: " + String(preciptype)); // Może być null
-  Serial.println("Wind Speed: " + String(windspeed));
-  Serial.println("Pressure: " + String(pressure));
-  Serial.println("Cloud Cover: " + String(cloudcover));
-  Serial.println("UV Index: " + String(uvindex));
-  Serial.println("Wind Speed Max: " + String(windspeedmax));
-  Serial.println("Wind Speed Mean: " + String(windspeedmean));
-  Serial.println("Wind Speed Min: " + String(windspeedmin));
-  Serial.println("Sunrise: " + String(sunrise));
-  Serial.println("Sunset: " + String(sunset));
-  Serial.println();
-}
-
-void getDataFromStation(){
+String getDataFromStation(){
   //Your Domain name with URL path or IP address with path
-String serverName = "http://192.168.101.76";
+String serverName = "http://192.168.101.76/json";
+String dataJson = "";
 
 // the following variables are unsigned longs because the time, measured in
 // milliseconds, will quickly become a bigger number than can be stored in an int.
 unsigned long lastTime = 0;
-// Timer set to 10 minutes (600000)
-//unsigned long timerDelay = 600000;
-// Set timer to 5 seconds (5000)
+
 unsigned long timerDelay = 5000;
 
-    //Send an HTTP POST request every 10 minutes
   if ((millis() - lastTime) > timerDelay) {
-    //Check WiFi connection status
+
     if(WiFi.status()== WL_CONNECTED){
       HTTPClient http;
-      WiFiClient client; // Utwórz obiekt WiFiClien
+      WiFiClient client; 
       String serverPath = serverName;
-      
-      // Your Domain name with URL path or IP address with path
+
       http.begin(client, serverPath.c_str());
       
-      // If you need Node-RED/server authentication, insert user and password below
-      //http.setAuthorization("REPLACE_WITH_SERVER_USERNAME", "REPLACE_WITH_SERVER_PASSWORD");
-      
-      // Send HTTP GET request
+
       int httpResponseCode = http.GET();
       Serial.println("wykonanie get do servera http");
       if (httpResponseCode>0) {
         Serial.print("HTTP Response code: ");
         Serial.println(httpResponseCode);
-        String payload = http.getString();
-        Serial.println(payload);
+        dataJson = http.getString();
+
+        
       }
       else {
         Serial.print("Error code: ");
         Serial.println(httpResponseCode);
       }
-      // Free resources
       http.end();
     }
     else {
@@ -466,4 +395,5 @@ unsigned long timerDelay = 5000;
     }
     lastTime = millis();
   }
+  return dataJson;
 }
