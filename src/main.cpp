@@ -8,6 +8,7 @@
 #include <ESP8266HTTPClient.h>
 #include <WiFiClientSecure.h>
 #include "decisionTree.h"
+#include <TimeLib.h>
 //---------------------------------------
 #ifndef STASSID
 #define STASSID "" // wifi name
@@ -26,8 +27,11 @@ const char *password = STAPSK;
 ESP8266WebServer server(80); //serwer do przyjmowania requestów http
 String dateAndTime=" ";//date and time init
 
+short dniBezPodlewania=0;
 WiFiClient client;
 
+String wczoraj;
+String jutro;
 int program=0;//aktualny program podlewania(0-nie wybrany)
 unsigned long  lastWatheringTime = millis(); // sprawdz czy tyle milis się zmieści ile trzeba - czas od ostatniego podlewania
 bool watheringIsOn=false; // czy podlewanie jest aktualnie właczone
@@ -130,7 +134,7 @@ void connectAndSave() {
   else {
     Serial.println("Connected to server!");
     // Make a HTTP request:
-    clientS.println("GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Lublin/2024-01-10/2024-01-14?unitGroup=metric&elements=datetime%2Ctemp%2Cdew%2Chumidity%2Cprecip%2Cprecipprob%2Cpreciptype%2Cwindspeedmax%2Cwindspeedmean%2Cpressure&include=fcst%2Cremote%2Cobs%2Cdays&key=&contentType=json HTTP/1.0");
+    clientS.println("GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Lublin/" + wczoraj + "/" + jutro + "?unitGroup=metric&elements=datetime%2Ctemp%2Cdew%2Chumidity%2Cprecip%2Cprecipprob%2Cpreciptype%2Cwindspeedmax%2Cwindspeedmean%2Cpressure%2Cuvindex&include=fcst%2Cremote%2Cobs%2Cdays&key=&contentType=json HTTP/1.0");
     clientS.println("Host: weather.visualcrossing.com");
     clientS.println("Connection: close");
     clientS.println();
@@ -214,14 +218,14 @@ void setup(void)
   if (MDNS.begin("esp8266")) { 
     Serial.println("MDNS responder started"); 
     }
-
+  getTime();// zapisz czas
   connectAndSave();
 
 
   String jsonDataString = getDataFromStation();
   deserializeJson(doc2, jsonDataString);
 
-  makeWatheringDecision(doc,doc2);
+  makeWatheringDecision(doc,doc2,dniBezPodlewania);
 
   server.on("/", handleRoot);
   server.on("/on", [](){
@@ -242,7 +246,7 @@ void setup(void)
   Serial.println("HTTP server started");
 
 
-  getTime();// zapisz czas
+ 
   //wylicz ile trzeba poczekać do godziny 21 (zobacz czy sie spieszy godzine czy późni)
   setupTime = czas[0] *60*60*1000 + czas[1] *60*1000 + czas[2] *1000;// w ms
   //godzina 22 w ms to -> 79 200 000
@@ -275,12 +279,21 @@ void loop(void) {
   delay(500);//czas na odpowiedź
 
   if(czasCzekania<=millis())//jeśli już czas to sprawdź czy odpalić test na podlewanie
-{   czasCzekania=86400000+millis();//24h w ms do odjecia jeszcze czas podlewania w przyszlosci #TODO
+{   
+   getTime();//aktualizuj date i czas
+  czasCzekania=86400000+millis();//24h w ms do odjecia jeszcze czas podlewania w przyszlosci #TODO
+  
     //if(wathering()==true){
-    if(makeWatheringDecision(doc,doc2)==true)// czy właczyć podlewanie czy nie z drzewa
+    if(makeWatheringDecision(doc,doc2,dniBezPodlewania)==true)// czy właczyć podlewanie czy nie z drzewa
     {
+      
       digitalWrite(LED_BUILTIN, LOW);  //tylkko testowo zapal leda
       unsigned long  watheringTimeOn= millis(); //zapisz czas rozpoczęcia podlewania
+      dniBezPodlewania=0;
+    }
+    else
+    {
+      dniBezPodlewania++;
     }
   if(watheringIsOn)
   changeWathering();
@@ -317,11 +330,22 @@ NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", utcOffsetInSeconds);
   // Uzyskanie formatowanej daty i czasu
   char buffer[20];
   strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", timeinfo);// mogę sobie uciąć samą datę bez godziny do dziennego API
-
-  // Wyświetlenie sformatowanej daty i czasu
-  Serial.println(buffer);
+  Serial.println("Obecna data: " + String(buffer));
   dateAndTime = buffer;
 
+  // Uzyskanie daty dnia następnego
+  timeinfo->tm_mday += 1;
+  mktime(timeinfo);
+  strftime(buffer, sizeof(buffer), "%Y-%m-%d", timeinfo);
+  Serial.println("Data dnia następnego: " + String(buffer));
+  jutro = String(buffer);
+
+  // Uzyskanie daty dnia poprzedniego
+  timeinfo->tm_mday -= 2; // Odejmujemy 2, aby uzyskać datę dnia poprzedniego
+  mktime(timeinfo);
+  strftime(buffer, sizeof(buffer), "%Y-%m-%d", timeinfo);
+  Serial.println("Data dnia poprzedniego: " + String(buffer));
+  wczoraj = String(buffer);
   czas[0]=timeClient.getHours();
   czas[1]=timeClient.getMinutes();
   czas[2]=timeClient.getSeconds();

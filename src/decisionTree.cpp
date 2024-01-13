@@ -4,6 +4,7 @@
 
 
 short probabilitySum = 0;
+float thresholdWatherLewel = 50.0;
 
 
 bool czyBedziePadacWCiaguGodzin(int x) 
@@ -11,7 +12,7 @@ bool czyBedziePadacWCiaguGodzin(int x)
     return true;
 }
 
-bool czyPadaloWiecejNiz(float x)
+bool czyPadaloWiecejNiz(float threshold, float opad)
 {
     return true;
 }
@@ -30,21 +31,26 @@ bool cieplejNizStopni(float stopnie)
     return true;
 }
 
-bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)
+bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2, short dniBezPodlewania)
 {
     Serial.println("\nmake wathering decision doc");
     serializeJsonPretty(doc, Serial);
     serializeJsonPretty(doc2, Serial);
 
-
+    
+    //0 przedwczoraj
+    //1 wczoraj
+    //2 dzisiaj
+    //3 jutro
+    //4 pojutrze
 
 
     //-------------------------
-    if( 1==1 )
+    if( float(doc2["WaterLewel"]) > thresholdWatherLewel)
     {// tak jest mokro
         probabilitySum += 0;
 
-        if (czyPadaloWiecejNiz(0))
+        if (czyPadaloWiecejNiz(0,0))
         {//tak padalo wiecej niz x litrow
             probabilitySum +=0;
         }
