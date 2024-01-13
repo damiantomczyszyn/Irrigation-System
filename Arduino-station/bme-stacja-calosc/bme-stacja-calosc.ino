@@ -1,55 +1,42 @@
-/*********
-  Complete project details at https://randomnerdtutorials.com  
-
-  Server station
-*********/
-
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 #include <DHT.h>
-
-
-// Load Wi-Fi library
 #include <ESP8266WiFi.h>
 #include "ESP8266WebServer.h"
 
-
-const char* ssid     = "dhtBMEserver";
-const char* password = "dhtBMEserver#";
+const char* ssid     = "";
+const char* password = "";
 
 ESP8266WebServer server;
 String getWeather();
-
-
-
-/*#include <SPI.h>
-#define BME_SCK 14
-#define BME_MISO 12
-#define BME_MOSI 13
-#define BME_CS 15*/
+String getJsonWeather();
 
 #define DHTTYPE    DHT22 
 #define DHTPIN D3
+#define SEALEVELPRESSURE_HPA (1013.25)
 
 DHT dht(DHTPIN, DHTTYPE);
 
-// current temperature & humidity, updated in loop()
 float t = 0.0;
 float h = 0.0;
-
-
-
 int val = 0 ;
+unsigned long delayTime;
 
-
-#define SEALEVELPRESSURE_HPA (1013.25)
 
 Adafruit_BME280 bme; // I2C
 //Adafruit_BME280 bme(BME_CS); // hardware SPI
 //Adafruit_BME280 bme(BME_CS, BME_MOSI, BME_MISO, BME_SCK); // software SPI
 
-unsigned long delayTime;
+
+
+
+void handleNotFound() 
+{
+   server.send(404, "text/plain", "Not found");
+}
+ 
+
 
 void setup() {
   Serial.begin(9600);
@@ -87,6 +74,8 @@ void setup() {
   Serial.println(WiFi.localIP());
 
 server.on("/",[](){server.send(200,"text/plain",getWeather());});
+//server.on("/control",toggleLED);
+server.on("/json",[](){server.send(200,"text/plain",getJsonWeather());});
 //server.on("/control",toggleLED);
   
   server.begin();
@@ -144,8 +133,6 @@ if (isnan(h)) {
 else {
    weatherS+=h;
 }
-
-
 t = dht.readTemperature();
 weatherS+="temperature = ";
 if (isnan(t)) {
@@ -155,7 +142,34 @@ else {
   weatherS+=t;
 }
 
-
-  
 return weatherS;
+}
+
+String getJsonWeather(){
+  String weatherS = "{";
+
+//const char* jsonString = R"({"Temperature": 25.26,"Pressure": 1000.50,"Altitude": 106.70,"Humidity": 28.79})";
+
+  weatherS+="\"Temperature\": ";
+  weatherS+=bme.readTemperature();
+  weatherS+=",";
+    
+  weatherS+="\"Pressure\": ";
+  weatherS+=bme.readPressure() / 100.0F;
+  weatherS+=",";
+
+  weatherS+="\"Altitude\": ";
+  weatherS+=bme.readAltitude(SEALEVELPRESSURE_HPA);
+  weatherS+=",";
+
+  weatherS+="\"Humidity\": ";
+  weatherS+=bme.readHumidity();
+  weatherS+=",";
+
+  val=analogRead(A0); // Water Level Sensor output pin connected A0
+  weatherS+="\"WaterLewel\": ";  // See the Value In Serial Monitor
+  weatherS+=val;  // See the Value In Serial Monitor
+  weatherS+="}";
+
+  return weatherS;
 }
