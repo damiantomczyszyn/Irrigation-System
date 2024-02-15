@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-02-15T11:00:51.400Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0" etag="3hjkwH_UduQMpuXOz-vf" version="23.1.1" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2024-02-15T11:15:16.242Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0" etag="yQbOVrTwqjRroI-1eaPk" version="23.1.1" type="github" pages="5">
   <diagram name="Wstepny diagram" id="2a216829-ef6e-dabb-86c1-c78162f3ba2b">
     <mxGraphModel dx="1434" dy="774" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
       <root>
@@ -1021,17 +1021,8 @@
         <mxCell id="sPTDsrU_s9xtTtz2GCBZ-34" value="85" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1070" y="718.75" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="4K1e3OppX2mwY6Oc0DdX-4" value="UV index mniejszy niż" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="-720" y="860" width="60" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="4K1e3OppX2mwY6Oc0DdX-6" value="Aktualne ciśnienie jeśli małe to zmniejsz szanse lekko" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-140" y="567.5" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="4K1e3OppX2mwY6Oc0DdX-9" value="przewidywana temperatura powietrza bedzie wysoka&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="-820" y="867.5" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="4K1e3OppX2mwY6Oc0DdX-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="4K1e3OppX2mwY6Oc0DdX-9" target="4K1e3OppX2mwY6Oc0DdX-9" edge="1">
-          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="4K1e3OppX2mwY6Oc0DdX-12" value="UV index większy od 3(uszkodzenia roslin)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="410" y="607.5" width="60" height="30" as="geometry" />
@@ -1139,7 +1130,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="4K1e3OppX2mwY6Oc0DdX-54" value="" style="swimlane;startSize=0;" parent="1" vertex="1">
-          <mxGeometry x="-840" y="800" width="210" height="137.5" as="geometry" />
+          <mxGeometry x="-770.5" y="800" width="70" height="77.5" as="geometry" />
+        </mxCell>
+        <mxCell id="4K1e3OppX2mwY6Oc0DdX-4" value="UV index mniejszy niż" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="4K1e3OppX2mwY6Oc0DdX-54" vertex="1">
+          <mxGeometry x="5" y="23.75" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="4K1e3OppX2mwY6Oc0DdX-56" value="-25" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-433.5" y="847.5" width="60" height="30" as="geometry" />
