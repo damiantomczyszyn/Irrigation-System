@@ -11,3 +11,6 @@
 
 INFO:
 pin 13 jest używany on/off
+
+Dokumentacja parametrów pogodowych z API:
+https://www.visualcrossing.com/resources/documentation/weather-data/weather-data-documentation/

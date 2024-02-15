@@ -225,7 +225,7 @@ void setup(void)
   String jsonDataString = getDataFromStation();
   deserializeJson(doc2, jsonDataString);
 
-  makeWatheringDecision(doc,doc2,dniBezPodlewania);
+  makeWatheringDecision(doc,doc2,dniBezPodlewania);//(weather api json, station json, dni bez włączenia podlewania)
 
   server.on("/", handleRoot);
   server.on("/on", [](){
