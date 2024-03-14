@@ -27,8 +27,7 @@ Historyczne dane zmierzone:
 8. Ćiśnienie. - nie mam go. Muszę poszukać w historycznym api na necie albo przyjąć średnią dla miesiąca
 9. T - temperatura
 10. Wilgotność gleby - nie mam jej. Muszę poszukać w historycznym api na necie albo przyjąć średnią dla miesiąca, albo pójść wg opadów dnia poprzedniego
-
-Precip - w ciągu godziny ile spadło. 
+Precip - w ciągu godziny ile spadło w mm. trzeba sumować godziny z całego dnia
 
 
 Czego mi potrzeba? - A) danych do zamockowania których nie mam oraz B)dane do porównania.

@@ -1,0 +1,64 @@
+Chcę przygotować pliki JSON
+w którym są wartości dla 3 dni.
+0. dzień poprzedni
+1. Dzień dzisiejszy
+2. Dzień następny
+
+
+Jako forecast JSON
+"days": [
+        {
+            "datetime": "2024-03-13",
+            "datetimeEpoch": 1710284400,
+            "tempmin": 0.0,
+            "temp": null,
+            "feelslikemax": 0.0,
+            "humidity": null,
+            "pressure": null
+        },
+        {
+            "datetime": "2024-03-14",
+            "datetimeEpoch": 1710370800,
+            "tempmin": 3.8,
+            "temp": 5.1,
+            "feelslikemax": 6.0,
+            "humidity": 86.3,
+            "pressure": 1018.8
+        },
+        {
+            "datetime": "2024-03-15",
+            "datetimeEpoch": 1710457200,
+            "tempmin": 2.3,
+            "temp": 5.3,
+            "feelslikemax": 7.1,
+            "humidity": 82.4,
+            "pressure": 1017.0
+        },
+        {
+            "datetime": "2024-03-16",
+            "datetimeEpoch": 1710543600,
+            "tempmin": 4.0,
+            "temp": 7.6,
+            "feelslikemax": 10.3,
+            "humidity": 90.0,
+            "pressure": 1014.3
+        },
+        {
+            "datetime": "2024-03-17",
+            "datetimeEpoch": 1710630000,
+            "tempmin": 2.2,
+            "temp": 5.5,
+            "feelslikemax": 6.9,
+            "humidity": 76.2,
+            "pressure": 1018.5
+        }
+    ]
+
+
+Jako czujniki JSON:
+{
+"Temperature": 25,
+"Humidity": 25,
+"WaterLewel": 50,
+"Pressure": 100
+}
