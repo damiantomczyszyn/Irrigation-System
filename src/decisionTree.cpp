@@ -23,7 +23,7 @@ bool czyJestMokro()
 
 bool czyPadaloDuzoPrzezOstatnieDwaDni()
 {
-    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][1]["precip"] >  100.0f)//2 dni opadow w mm
+    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][0]["precip"] >  100.0f)//2 dni opadow w mm
         return true;
     return false;
 }
