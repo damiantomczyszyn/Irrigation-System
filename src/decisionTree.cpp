@@ -80,6 +80,14 @@ bool spadnieWiecejNiz20MM()
 
 bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2, short dniBezPodlewania)//(weather api json, station json, dni bez włączenia podlewania)
 {   
+
+    //dodaj wszędzie zabezpieczenie przed nullami
+    //dodaj zliczenia dni bez podlewania. niech gdzieś to zwraca i trzyma w pamięci.
+    //
+
+    //0 -wczoraj
+    //1 -dzisiaj
+    //2 -jutro
     probabilitySum = 0;
 
     dniBezPodlewaniaG = &dniBezPodlewania;

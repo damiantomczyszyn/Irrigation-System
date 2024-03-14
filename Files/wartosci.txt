@@ -1,0 +1,48 @@
+Moje wartości (actualny forecast):
+1 humidity – relative humidity in %
+2 precip – the amount of liquid precipitation that fell or is predicted to fall in the period. This includes the liquid-equivalent amount of any frozen precipitation such as snow or ice.
+3 datetime – ISO 8601 formatted date
+4 uVindeks
+5 precipprob (forecast only) – the likelihood of measurable precipitation ranging from 0% to 100%
+6 temp
+
+Dane z czujnika:
+7. humidity - wilgotnosc
+8. Pressure - cisnienie
+9. temperature - temperatura
+10 watherLewel - wilgotnosc gleby na czujniku
+
+
+Historical forecast:
+1 RN - relatywna wilgotnosc. Zostaje taka jaka jest
+2 DailyPrecip - ilosc opadow w 24h w mm
+3 data to data
+4 uv indeks wezmę średni dla całej australii
+5 DailyPop - szansa na spadek przynajmniej 0.2mm opadów w 24h
+6 T - pomiar temperatury co godzine - trzeba wziąć z całego dnia i podzielić aby dostać średnią
+
+
+Historyczne dane zmierzone:
+7. RH - wilgotność
+8. Ćiśnienie. - nie mam go. Muszę poszukać w historycznym api na necie albo przyjąć średnią dla miesiąca
+9. T - temperatura
+10. Wilgotność gleby - nie mam jej. Muszę poszukać w historycznym api na necie albo przyjąć średnią dla miesiąca, albo pójść wg opadów dnia poprzedniego
+
+Precip - w ciągu godziny ile spadło. 
+
+
+Czego mi potrzeba? - A) danych do zamockowania których nie mam oraz B)dane do porównania.
+
+Do zamockowania:
+uv indeks przewidywany - podstawię średni dla danego miesiąca z losowaniem +/-1 ,albo po prostu średni dla miesiąca
+wilgotność gleby(nie powietrza): jeśli opady z ostatniego dnia większe niż X, to wtedy uznaję że gleba jest wilgotna następnego dnia.
+
+
+B) dane do porównania.
+Jak je porównywać? 
+1. zrobić podsumowanie symulacji ile razy odpaliło się podlewanie.
+2. Dnia gdy odpaliło się podlewania(koniec dnia dzisiejszego) sprawdzamy ile deszczu spadło dnia następnego i na oko  zrobimy tabelę czy powinno się włączyć,
+czy spadło tyle, że był to błąd.
+
+
+
