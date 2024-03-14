@@ -14,20 +14,19 @@ Dane z czujnika:
 
 
 Historical forecast:
-1 RN - relatywna wilgotnosc. Zostaje taka jaka jest
-2 DailyPrecip - ilosc opadow w 24h w mm
-3 data to data
-4 uv indeks wezmę średni dla całej australii
-5 DailyPop - szansa na spadek przynajmniej 0.2mm opadów w 24h
-6 T - pomiar temperatury co godzine - trzeba wziąć z całego dnia i podzielić aby dostać średnią
+1 RN - relatywna wilgotnosc. Zostaje taka jaka jest +
+2 DailyPrecip - ilosc opadow w 24h w mm +
+3 data to data +
+4 uv indeks wezmę średni dla całej australii +
+5 DailyPop - szansa na spadek przynajmniej 0.2mm opadów w 24h +
+6 T - pomiar temperatury co godzine - trzeba wziąć z całego dnia i podzielić aby dostać średnią +
 
 
 Historyczne dane zmierzone:
 7. RH - wilgotność
-8. Ćiśnienie. - nie mam go. Muszę poszukać w historycznym api na necie albo przyjąć średnią dla miesiąca
+8. Ćiśnienie. -z api w necie
 9. T - temperatura
-10. Wilgotność gleby - nie mam jej. Muszę poszukać w historycznym api na necie albo przyjąć średnią dla miesiąca, albo pójść wg opadów dnia poprzedniego
-Precip - w ciągu godziny ile spadło w mm. trzeba sumować godziny z całego dnia
+10. Wilgotność gleby - z api w necie
 
 
 Czego mi potrzeba? - A) danych do zamockowania których nie mam oraz B)dane do porównania.
@@ -45,3 +44,24 @@ czy spadło tyle, że był to błąd.
 
 
 
+Dane są z kilku pomiarów o różnym czasie prognozowane na te same godziny.
+Muszę odzworować zachowanie mojego programu.
+Dnia numer X wezmę pomiar z TEGO dnia  z TEJ SAMEJ LUB NAJBLIŻSZEJ godziny na dzień X-1, X teraz, X+1 tej godziny.
+I tak się będę przesuwał +24h o ile godziny są stabilne, a powinny być.
+
+Dla każdego miesiąca sprawdzić kiedy zaczyna się pierwsza wartość daty przewidywania i dla którego dnia
+
+
+
+Wyszukiwać po AWS całe słowa i są stacje
+
+69132 BRAIDWOOD RACECOURSE AWS AUTOMATIC Rainfall Medium
+
+NSW_PT028 66194 CANTERBURY RACECOURSE AWS AUTOMATIC Rainfall Medium
+
+OBA z +10
+
+
+
+1491048000  	Sat Apr 01 2017 12:00:00 GMT+0000 - +10h GMT czyli 22
+1491004800	Sat Apr 01 2017 00:00:00 GMT+0000
