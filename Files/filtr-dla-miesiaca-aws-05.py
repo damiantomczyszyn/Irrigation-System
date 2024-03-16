@@ -9,7 +9,7 @@ stacja_id = 69132 # do zmiany samemu
 rok = 2017
 miesiac = 5 # do zmiany samemu
 miesiac2 = "05"
-
+filename_pattern = 'aws_hourly_201705??.csv'
 
 
 def fetch_weather_data(latitude, longitude, start_date, end_date, parameters):
@@ -18,6 +18,7 @@ def fetch_weather_data(latitude, longitude, start_date, end_date, parameters):
     response = requests.get(url)
     
     if response.status_code == 200:
+        print("dobry request")
         return response.json()
     else:
         print("Wystąpił problem podczas pobierania danych:", response.text)
@@ -82,7 +83,7 @@ def filter_and_save_to_csv(input_filename, output_filename,epoch_time,api_data):
     # Dodaj nowy wiersz do ramki danych
     new_row = {
         'station_number': stacja_id,
-        'unit': '%',
+        'unit': 'mm',
         'parameter': 'Precip24h',
         'value': precip_sum
     }
@@ -100,6 +101,34 @@ def filter_and_save_to_csv(input_filename, output_filename,epoch_time,api_data):
     df2['station_number'] = stacja_id
     
     filtered_df = pd.concat([filtered_df, df2], ignore_index=True)
+
+
+    # Oblicz średnią dla wartości w kolumnie 'value', gdzie 'parameter' to 'T'
+    average_value_Pr = filtered_df.loc[filtered_df['parameter'] == 'surface_pressure', 'value'].mean()
+    average_value_Pr = round(average_value_Pr, 2)
+
+
+    new_row = {
+        'station_number': stacja_id,
+        'unit': 'hPa',
+        'parameter': 'PressureMean',
+        'value': average_value_Pr
+    }
+    filtered_df = filtered_df._append(new_row, ignore_index=True)
+
+
+        # Oblicz średnią dla wartości w kolumnie 'value', gdzie 'parameter' to 'T'
+    average_value_Soil7= filtered_df.loc[filtered_df['parameter'] == 'soil_moisture_0_to_7cm', 'value'].mean()
+    average_value_Soil7 = round(average_value_Soil7, 2)
+
+
+    new_row = {
+        'station_number': stacja_id,
+        'unit': 'm3/m3',
+        'parameter': 'soil_moisture_0_to_7cmMean',
+        'value': average_value_Soil7
+    }
+    filtered_df = filtered_df._append(new_row, ignore_index=True)
     
     # Zapisz wybrane wiersze do nowego pliku CSV
     filtered_df.to_csv(output_filename, index=False)
@@ -108,7 +137,7 @@ def filter_and_save_to_csv(input_filename, output_filename,epoch_time,api_data):
 
 # Wzorzec nazwy pliku
 
-filename_pattern = 'aws_hourly_201705??.csv'
+
 
 # Pętla dla każdego pliku zgodnego z wzorcem
 for input_filename in glob.glob(filename_pattern):

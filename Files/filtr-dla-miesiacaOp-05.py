@@ -8,7 +8,7 @@ stacja_id = 69132 # do zmiany samemu
 rok = 2017
 miesiac = 5 # do zmiany samemu
 miesiac2 = "05"
-average_value_Uv = 11 # do sprawdzenia i zmiany dla miesiaca
+average_value_Uv = 4 # do sprawdzenia i zmiany dla miesiaca
 
 def filter_and_save_to_csv(input_filename, output_filename,epoch_time):
     # Wczytaj plik CSV do obiektu DataFrame
