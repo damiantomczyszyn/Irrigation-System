@@ -13,8 +13,8 @@
 #include "globals.h"
 //---------------------------------------
 #ifndef STASSID
-#define STASSID "dlink" // wifi name
-#define STAPSK "tomczyszyn"// wifi password
+#define STASSID "" // wifi name
+#define STAPSK ""// wifi password
 #endif
 #define ZAW1 D0 //zawory
 #define ZAW2 D1 //zawory
