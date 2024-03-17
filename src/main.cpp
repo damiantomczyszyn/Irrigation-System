@@ -230,7 +230,7 @@ void setup(void)
   //String jsonDataString = getDataFromStation();
   //deserializeJson(doc2, jsonDataString);
 
-  void testujDzialanie();
+  void testujDzialanie2();
 
 
   server.on("/", handleRoot);
