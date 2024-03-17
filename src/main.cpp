@@ -13,8 +13,8 @@
 #include "globals.h"
 //---------------------------------------
 #ifndef STASSID
-#define STASSID "" // wifi name
-#define STAPSK ""// wifi password
+#define STASSID "dlink" // wifi name
+#define STAPSK "tomczyszyn"// wifi password
 #endif
 #define ZAW1 D0 //zawory
 #define ZAW2 D1 //zawory
@@ -25,7 +25,8 @@
 short dniBezPodlewania = 0;
 const char *ssid = STASSID;
 const char *password = STAPSK;
-void testujDzialanie();
+
+void testujDzialanie2();
 //---------------------------------------
 ESP8266WebServer server(80); //serwer do przyjmowania requestów http
 String dateAndTime=" ";//date and time init
@@ -230,7 +231,7 @@ void setup(void)
   //String jsonDataString = getDataFromStation();
   //deserializeJson(doc2, jsonDataString);
 
-  void testujDzialanie2();
+ testujDzialanie2();
 
 
   server.on("/", handleRoot);
@@ -540,18 +541,20 @@ unsigned long timerDelay = 5000;
 void testujDzialanie2()
 {
   Serial.println("Test Rozpoczety");
-  StaticJsonDocument<200> jsonDoc2;
-  StaticJsonDocument<150> jsonDoc;
+  //DynamicJsonDocument jsonDoc2(capacity);
+  //StaticJsonDocument<capacity> jsonDoc2;
+  //DynamicJsonDocument jsonDoc(150);
+  //StaticJsonDocument<150> jsonDoc;
     // Parsuj otrzymane dane JSON
 
-    String testData = getDataToTesting("http://192.168.101.201:8000/forecast_2017_05_01.json");
-    DeserializationError error = deserializeJson(jsonDoc, testData);
+    String testData = getDataToTesting("http://192.168.101.201:8000/data1");
+    DeserializationError error = deserializeJson(doc, testData);
 
     // Sprawdź, czy parsowanie się powiodło
     if (!error) {
       // Tutaj możesz przetwarzać dane JSON, np. wyświetlić je na Serial Monitor
       Serial.println("odczytano dane");
-      serializeJsonPretty(jsonDoc, Serial);
+      serializeJsonPretty(doc, Serial);
      
 
 
@@ -563,15 +566,15 @@ void testujDzialanie2()
 
     // Zadeklaruj obiekt JSON
     
-    testData = getDataToTesting("http://192.168.101.201:8000/filtered_aws_05_01.json");
+    testData = getDataToTesting("http://192.168.101.201:8000/data2");
     // Parsuj otrzymane dane JSON
-    DeserializationError error2 = deserializeJson(jsonDoc2, testData);
+    DeserializationError error2 = deserializeJson(doc2, testData);
 
     // Sprawdź, czy parsowanie się powiodło
     if (!error2) {
       // Tutaj możesz przetwarzać dane JSON, np. wyświetlić je na Serial Monitor
       Serial.println("odczytano dane");
-      serializeJsonPretty(jsonDoc2, Serial);
+      serializeJsonPretty(doc2, Serial);
      
 
 
@@ -584,12 +587,13 @@ void testujDzialanie2()
 
   Serial.println("Wywołanie testu podlewania:");
 
-  if(makeWatheringDecision(jsonDoc,jsonDoc2))
+  if(makeWatheringDecision(doc,doc2))
   {
-    Serial.println("Podlewanie włączyło się");
+    Serial.println("\nPodlewanie włączyło się");
   }
   else{
-    Serial.println("Nie włączono podlewania");
+    Serial.println("\nNie włączono podlewania");
   }
 Serial.println("Test zakonczony");
+//chwilka czekania aby skrypt pythona zmienił pliki
 }
