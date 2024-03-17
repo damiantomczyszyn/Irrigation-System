@@ -13,8 +13,8 @@
 #include "globals.h"
 //---------------------------------------
 #ifndef STASSID
-#define STASSID "" // wifi name
-#define STAPSK ""// wifi password
+#define STASSID "dlink" // wifi name
+#define STAPSK "tomczyszyn"// wifi password
 #endif
 #define ZAW1 D0 //zawory
 #define ZAW2 D1 //zawory
@@ -230,8 +230,12 @@ void setup(void)
 
   //String jsonDataString = getDataFromStation();
   //deserializeJson(doc2, jsonDataString);
-
- testujDzialanie2();
+  for (int i = 0; i < count; i++)
+  {
+    testujDzialanie2();
+  }
+  
+ 
 
 
   server.on("/", handleRoot);
