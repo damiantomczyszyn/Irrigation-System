@@ -9,6 +9,8 @@
 #include <WiFiClientSecure.h>
 #include "decisionTree.h"
 #include <TimeLib.h>
+
+#include "globals.h"
 //---------------------------------------
 #ifndef STASSID
 #define STASSID "" // wifi name
@@ -20,18 +22,20 @@
 #define ZAW4 D3 //zawory
 #define ILOSC_ZAWOROW 4
 
-
+short dniBezPodlewania = 0;
 const char *ssid = STASSID;
 const char *password = STAPSK;
 //---------------------------------------
 ESP8266WebServer server(80); //serwer do przyjmowania requestów http
 String dateAndTime=" ";//date and time init
 
-short dniBezPodlewania=0;
+
 WiFiClient client;
 
 String wczoraj;
 String jutro;
+String apikey="";
+
 int program=0;//aktualny program podlewania(0-nie wybrany)
 unsigned long  lastWatheringTime = millis(); // sprawdz czy tyle milis się zmieści ile trzeba - czas od ostatniego podlewania
 bool watheringIsOn=false; // czy podlewanie jest aktualnie właczone
@@ -134,7 +138,7 @@ void connectAndSave() {
   else {
     Serial.println("Connected to server!");
     // Make a HTTP request:
-    clientS.println("GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Lublin/" + wczoraj + "/" + jutro + "?unitGroup=metric&elements=datetime%2Ctemp%2Cdew%2Chumidity%2Cprecip%2Cprecipprob%2Cpreciptype%2Cwindspeedmax%2Cwindspeedmean%2Cpressure%2Cuvindex&include=fcst%2Cremote%2Cobs%2Cdays&key=&contentType=json HTTP/1.0");
+    clientS.println("GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Lublin/" + wczoraj + "/" + jutro + "?unitGroup=metric&elements=datetime%2Ctemp%2Cdew%2Chumidity%2Cprecip%2Cprecipprob%2Cpreciptype%2Cwindspeedmax%2Cwindspeedmean%2Cpressure%2Cuvindex&include=fcst%2Cremote%2Cobs%2Cdays&key="+ apikey + "&contentType=json HTTP/1.0");
     clientS.println("Host: weather.visualcrossing.com");
     clientS.println("Connection: close");
     clientS.println();
