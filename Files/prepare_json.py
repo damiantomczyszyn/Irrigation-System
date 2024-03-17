@@ -4,22 +4,22 @@ import json
 # Wczytanie danych z plików CSV
 
 
-df1 = pd.read_csv('filtered_aws_05_01.csv')
-df2 = pd.read_csv('filtered_aws_05_02.csv')
-df3 = pd.read_csv('Op_filtered_2017_05_01.csv')
 
-dzien="01"
-miesiac="05"
 
-for i in range(1, 5):
+#dzien="01"
+miesiac="09"
+
+for i in range(1, 30):
     day = str(i).zfill(2)  
     dzien=str(i).zfill(2)
     dzien2=str(i+1).zfill(2)
+    dzien3=str(i+2).zfill(2)
         
 
     df1 = pd.read_csv(f'filtered_aws_{miesiac}_{dzien}.csv')
     df2 = pd.read_csv(f'filtered_aws_{miesiac}_{dzien2}.csv')
-    df3 = pd.read_csv(f'Op_filtered_2017_{miesiac}_{dzien}.csv')
+    df3 = pd.read_csv(f'Op_filtered_2017_{miesiac}_{dzien3}.csv')
+    print(i+1)
 
 
     # Funkcja do mapowania danych z DataFrame do formatu JSON dla pojedynczego pliku CSV
@@ -72,7 +72,8 @@ for i in range(1, 5):
 
 
     # Zapisanie danych JSON do pliku
-    with open(f'forecast_2017_{miesiac}_{dzien}.json', 'w') as json_file:
+    with open(f'forecast_2017_{miesiac}_{dzien2}.json', 'w') as json_file:
         json.dump(json_data, json_file, indent=4)
 
     print("Plik JSON został pomyślnie wygenerowany.")
+    
