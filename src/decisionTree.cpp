@@ -90,8 +90,8 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
     //2 -jutro
     probabilitySum = 0;
 
-    Serial.println("\nDni bez podlewania w makeWathering");
-    Serial.println(dniBezPodlewania);
+   // Serial.println("\nDni bez podlewania w makeWathering");
+   // Serial.println(dniBezPodlewania);
     // Serial.println("\nmake wathering decision doc");
     // serializeJsonPretty(doc["days"], Serial);
     // Serial.println("\nmake wathering decision doc2");
@@ -101,14 +101,14 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
     stationDoc = &doc2;
     Serial.println("");
     float temp = (*weatherApiDoc)["days"][0]["temp"];
-    Serial.print("TEMPERATURKA W FLOAT: ");
-    Serial.println(temp);
-    Serial.println("json z wskaznika0");
-    serializeJson((*weatherApiDoc)["days"][0]["temp"], Serial);
-    Serial.println("json z wskaznika1");
-    serializeJson((*weatherApiDoc)["days"][1], Serial);
-    Serial.println("json z wskaznika2");
-    serializeJson((*weatherApiDoc)["days"][2], Serial);
+    // Serial.print("TEMPERATURKA W FLOAT: ");
+    // Serial.println(temp);
+    // Serial.println("json z wskaznika0");
+    // serializeJson((*weatherApiDoc)["days"][0]["temp"], Serial);
+    // Serial.println("json z wskaznika1");
+    // serializeJson((*weatherApiDoc)["days"][1], Serial);
+    // Serial.println("json z wskaznika2");
+    // serializeJson((*weatherApiDoc)["days"][2], Serial);
 
 
 

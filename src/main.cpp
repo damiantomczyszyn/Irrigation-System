@@ -230,9 +230,11 @@ void setup(void)
 
   //String jsonDataString = getDataFromStation();
   //deserializeJson(doc2, jsonDataString);
-  for (int i = 0; i < count; i++)
+  for (int i = 0; i < 151; i++)
   {
+    Serial.println(i+1); 
     testujDzialanie2();
+    
   }
   
  
@@ -544,7 +546,7 @@ unsigned long timerDelay = 5000;
 }
 void testujDzialanie2()
 {
-  Serial.println("Test Rozpoczety");
+  //Serial.println("Test Rozpoczety");
   //DynamicJsonDocument jsonDoc2(capacity);
   //StaticJsonDocument<capacity> jsonDoc2;
   //DynamicJsonDocument jsonDoc(150);
@@ -557,8 +559,8 @@ void testujDzialanie2()
     // Sprawdź, czy parsowanie się powiodło
     if (!error) {
       // Tutaj możesz przetwarzać dane JSON, np. wyświetlić je na Serial Monitor
-      Serial.println("odczytano dane");
-      serializeJsonPretty(doc, Serial);
+     // Serial.println("odczytano dane");
+    //  serializeJsonPretty(doc, Serial);
      
 
 
@@ -577,8 +579,8 @@ void testujDzialanie2()
     // Sprawdź, czy parsowanie się powiodło
     if (!error2) {
       // Tutaj możesz przetwarzać dane JSON, np. wyświetlić je na Serial Monitor
-      Serial.println("odczytano dane");
-      serializeJsonPretty(doc2, Serial);
+     // Serial.println("odczytano dane");
+     // serializeJsonPretty(doc2, Serial);
      
 
 
@@ -589,15 +591,15 @@ void testujDzialanie2()
   
 
 
-  Serial.println("Wywołanie testu podlewania:");
+ // Serial.println("Wywołanie testu podlewania:");
 
   if(makeWatheringDecision(doc,doc2))
   {
-    Serial.println("\nPodlewanie włączyło się");
+    Serial.println("\nPodlewanie włączyło się 1");
   }
   else{
-    Serial.println("\nNie włączono podlewania");
+    Serial.println("\nNie włączono podlewania 0");
   }
-Serial.println("Test zakonczony");
+//Serial.println("Test zakonczony");
 //chwilka czekania aby skrypt pythona zmienił pliki
 }

@@ -29,3 +29,8 @@ Dane forecast zostały uzupełnione o:
 
 Mapa z średnimi UV uwzględnionymi w datasecie:
 http://www.bom.gov.au/climate/maps/averages/uv-index/?period=sep
+
+
+Pierwsze uruchomienie testów:
+19/151 podlewanie włączyło się
+132/151 podlewanie nie włączyło się
