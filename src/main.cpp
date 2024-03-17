@@ -227,12 +227,11 @@ void setup(void)
   connectAndSave();
 
 
-  String jsonDataString = getDataFromStation();
-  deserializeJson(doc2, jsonDataString);
+  //String jsonDataString = getDataFromStation();
+  //deserializeJson(doc2, jsonDataString);
 
   void testujDzialanie();
 
-  void testujDzialanie();
 
   server.on("/", handleRoot);
   server.on("/on", [](){
@@ -481,6 +480,106 @@ void testujDzialanie()
       Serial.println(error.c_str());
     }
   }
+
+
+  Serial.println("Wywołanie testu podlewania:");
+
+  if(makeWatheringDecision(jsonDoc,jsonDoc2))
+  {
+    Serial.println("Podlewanie włączyło się");
+  }
+  else{
+    Serial.println("Nie włączono podlewania");
+  }
+Serial.println("Test zakonczony");
+}
+
+String getDataToTesting(String serverName){
+  //Your Domain name with URL path or IP address with path
+//String serverName = "http://192.168.101.201:8000/filtered_aws_05_01.json";
+String dataJson = "";
+
+// the following variables are unsigned longs because the time, measured in
+// milliseconds, will quickly become a bigger number than can be stored in an int.
+unsigned long lastTime = 0;
+
+unsigned long timerDelay = 5000;
+
+  if ((millis() - lastTime) > timerDelay) {
+
+    if(WiFi.status()== WL_CONNECTED){
+      HTTPClient http;
+      WiFiClient client; 
+      String serverPath = serverName;
+
+      http.begin(client, serverPath.c_str());
+      
+
+      int httpResponseCode = http.GET();
+      Serial.println("wykonanie get do servera http");
+      if (httpResponseCode>0) {
+        Serial.print("HTTP Response code: ");
+        Serial.println(httpResponseCode);
+        dataJson = http.getString();
+
+        
+      }
+      else {
+        Serial.print("Error code: ");
+        Serial.println(httpResponseCode);
+      }
+      http.end();
+    }
+    else {
+      Serial.println("WiFi Disconnected");
+    }
+    lastTime = millis();
+  }
+  return dataJson;
+}
+void testujDzialanie2()
+{
+  Serial.println("Test Rozpoczety");
+  StaticJsonDocument<200> jsonDoc2;
+  StaticJsonDocument<150> jsonDoc;
+    // Parsuj otrzymane dane JSON
+
+    String testData = getDataToTesting("http://192.168.101.201:8000/forecast_2017_05_01.json");
+    DeserializationError error = deserializeJson(jsonDoc, testData);
+
+    // Sprawdź, czy parsowanie się powiodło
+    if (!error) {
+      // Tutaj możesz przetwarzać dane JSON, np. wyświetlić je na Serial Monitor
+      Serial.println("odczytano dane");
+      serializeJsonPretty(jsonDoc, Serial);
+     
+
+
+    } else {
+      Serial.print("Błąd podczas parsowania JSON: ");
+      Serial.println(error.c_str());
+    }
+  
+
+    // Zadeklaruj obiekt JSON
+    
+    testData = getDataToTesting("http://192.168.101.201:8000/filtered_aws_05_01.json");
+    // Parsuj otrzymane dane JSON
+    DeserializationError error2 = deserializeJson(jsonDoc2, testData);
+
+    // Sprawdź, czy parsowanie się powiodło
+    if (!error2) {
+      // Tutaj możesz przetwarzać dane JSON, np. wyświetlić je na Serial Monitor
+      Serial.println("odczytano dane");
+      serializeJsonPretty(jsonDoc2, Serial);
+     
+
+
+    } else {
+      Serial.print("Błąd podczas parsowania JSON: ");
+      Serial.println(error.c_str());
+    }
+  
 
 
   Serial.println("Wywołanie testu podlewania:");

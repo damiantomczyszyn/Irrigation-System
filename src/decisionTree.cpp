@@ -92,10 +92,10 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
     Serial.println("\nDni bez podlewania w makeWathering");
     Serial.println(dniBezPodlewania);
-    Serial.println("\nmake wathering decision doc");
-    serializeJsonPretty(doc["days"], Serial);
-    Serial.println("\nmake wathering decision doc2");
-    serializeJsonPretty(doc2, Serial);
+    // Serial.println("\nmake wathering decision doc");
+    // serializeJsonPretty(doc["days"], Serial);
+    // Serial.println("\nmake wathering decision doc2");
+    // serializeJsonPretty(doc2, Serial);
     
     weatherApiDoc = &doc;
     stationDoc = &doc2;
