@@ -1,12 +1,12 @@
 #include "decisionTree.h"
 #include <cstdlib>
 #include <ArduinoJson.h>
-
+#include "globals.h"
 
 short probabilitySum = 0;
 DynamicJsonDocument* stationDoc = nullptr;
 DynamicJsonDocument* weatherApiDoc = nullptr;
-short* dniBezPodlewaniaG = nullptr;
+
 bool czyBedziePadacWCiaguNastepnegoDnia() 
 {
     if((float)(*weatherApiDoc)["days"][2]["precipprob"] > 50.f)
@@ -35,7 +35,7 @@ int returnRandomInt()
 
 bool czasOdOstatniegoPodlewaniaWiekszyNizCzteryDni()
 {
-    if(*dniBezPodlewaniaG > 4)
+    if(dniBezPodlewania > 4)
         return true;
     return false;
 }
@@ -82,7 +82,8 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2, sh
 {   
     probabilitySum = 0;
 
-    dniBezPodlewaniaG = &dniBezPodlewania;
+    Serial.println("\nDni bez podlewania w makeWathering");
+    Serial.println(dniBezPodlewania);
     Serial.println("\nmake wathering decision doc");
     serializeJsonPretty(doc["days"], Serial);
     Serial.println("\nmake wathering decision doc2");
