@@ -229,7 +229,7 @@ void setup(void)
   String jsonDataString = getDataFromStation();
   deserializeJson(doc2, jsonDataString);
 
-  makeWatheringDecision(doc,doc2,dniBezPodlewania);//(weather api json, station json, dni bez włączenia podlewania)
+  makeWatheringDecision(doc,doc2);//(weather api json, station json, dni bez włączenia podlewania)
 
   server.on("/", handleRoot);
   server.on("/on", [](){
@@ -288,7 +288,7 @@ void loop(void) {
   czasCzekania=86400000+millis();//24h w ms do odjecia jeszcze czas podlewania w przyszlosci #TODO
   
     //if(wathering()==true){
-    if(makeWatheringDecision(doc,doc2,dniBezPodlewania)==true)// czy właczyć podlewanie czy nie z drzewa
+    if(makeWatheringDecision(doc,doc2)==true)// czy właczyć podlewanie czy nie z drzewa
     {
       
       digitalWrite(LED_BUILTIN, LOW);  //tylkko testowo zapal leda

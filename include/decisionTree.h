@@ -1,4 +1,3 @@
 #include <ArduinoJson.h>
 
-bool makeWatheringDecision(DynamicJsonDocument, DynamicJsonDocument, short);
-
+bool makeWatheringDecision(DynamicJsonDocument, DynamicJsonDocument);
