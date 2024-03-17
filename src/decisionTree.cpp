@@ -78,7 +78,7 @@ bool spadnieWiecejNiz20MM()
     return false;
 }
 
-bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2, short dniBezPodlewania)//(weather api json, station json, dni bez włączenia podlewania)
+bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(weather api json, station json, dni bez włączenia podlewania)
 {   
     probabilitySum = 0;
 
