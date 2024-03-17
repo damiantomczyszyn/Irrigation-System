@@ -25,6 +25,7 @@
 short dniBezPodlewania = 0;
 const char *ssid = STASSID;
 const char *password = STAPSK;
+void testujDzialanie();
 //---------------------------------------
 ESP8266WebServer server(80); //serwer do przyjmowania requestów http
 String dateAndTime=" ";//date and time init
@@ -229,7 +230,9 @@ void setup(void)
   String jsonDataString = getDataFromStation();
   deserializeJson(doc2, jsonDataString);
 
-  makeWatheringDecision(doc,doc2);//(weather api json, station json, dni bez włączenia podlewania)
+  void testujDzialanie();
+
+  void testujDzialanie();
 
   server.on("/", handleRoot);
   server.on("/on", [](){
@@ -424,4 +427,70 @@ unsigned long timerDelay = 5000;
     lastTime = millis();
   }
   return dataJson;
+}
+
+void testujDzialanie()
+{
+  Serial.println("Test Rozpoczety");
+  StaticJsonDocument<200> jsonDoc2;
+  StaticJsonDocument<150> jsonDoc;
+ if (Serial.available() > 0) {
+    // Czekaj na otrzymanie danych JSON
+    String jsonStr = Serial.readStringUntil('\n');
+
+    // Zadeklaruj obiekt JSON
+    
+
+    // Parsuj otrzymane dane JSON
+    DeserializationError error = deserializeJson(jsonDoc, jsonStr);
+
+    // Sprawdź, czy parsowanie się powiodło
+    if (!error) {
+      // Tutaj możesz przetwarzać dane JSON, np. wyświetlić je na Serial Monitor
+      Serial.println("odczytano dane");
+      serializeJsonPretty(jsonDoc, Serial);
+     
+
+
+    } else {
+      Serial.print("Błąd podczas parsowania JSON: ");
+      Serial.println(error.c_str());
+    }
+  }
+
+   if (Serial.available() > 0) {
+    // Czekaj na otrzymanie danych JSON
+    String jsonStr2 = Serial.readStringUntil('\n');
+
+    // Zadeklaruj obiekt JSON
+    
+
+    // Parsuj otrzymane dane JSON
+    DeserializationError error = deserializeJson(jsonDoc2, jsonStr2);
+
+    // Sprawdź, czy parsowanie się powiodło
+    if (!error) {
+      // Tutaj możesz przetwarzać dane JSON, np. wyświetlić je na Serial Monitor
+      Serial.println("odczytano dane");
+      serializeJsonPretty(jsonDoc2, Serial);
+     
+
+
+    } else {
+      Serial.print("Błąd podczas parsowania JSON: ");
+      Serial.println(error.c_str());
+    }
+  }
+
+
+  Serial.println("Wywołanie testu podlewania:");
+
+  if(makeWatheringDecision(jsonDoc,jsonDoc2))
+  {
+    Serial.println("Podlewanie włączyło się");
+  }
+  else{
+    Serial.println("Nie włączono podlewania");
+  }
+Serial.println("Test zakonczony");
 }
