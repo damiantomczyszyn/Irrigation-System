@@ -14,3 +14,18 @@ pin 13 jest używany on/off
 
 Dokumentacja parametrów pogodowych z API:
 https://www.visualcrossing.com/resources/documentation/weather-data/weather-data-documentation/
+
+Dane testowe przygotowane z:
+https://data.gov.au/data/dataset/rainfall-and-temperature-forecast-and-observations-verification-2017-05-to-2018-04
+Stacji o ID 69132 - BRAIDWOOD RACECOURSE AWS
+
+Dane historryczne zostały uzupełnione o:
+Dzienną wilgotność gleby na poziomie 0-7cm
+Ciśnienie powierzchniowe
+*Dla lokalizacji lat -35.4415, lon 149.7998 - Braidwood, New South Wales
+
+Dane forecast zostały uzupełnione o:
+Średni miesięczny index UV - dla danego obszaru
+
+Mapa z średnimi UV uwzględnionymi w datasecie:
+http://www.bom.gov.au/climate/maps/averages/uv-index/?period=sep
