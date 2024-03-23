@@ -9,7 +9,7 @@ DynamicJsonDocument* weatherApiDoc = nullptr;
 
 bool czyBedziePadacWCiaguNastepnegoDnia() 
 {
-    if((float)(*weatherApiDoc)["days"][2]["precipprob"] > 50.f)
+    if((float)(*weatherApiDoc)["days"][2]["precipprob"] > 10.f)
         return true;
     return false;
 }
@@ -23,7 +23,7 @@ bool czyJestMokro()
 
 bool czyPadaloDuzoPrzezOstatnieDwaDni()
 {
-    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][0]["precip"] >  50.0f)//2 dni opadow w mm
+    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][0]["precip"] >  20.0f)//2 dni opadow w mm
         return true;
     return false;
 }
@@ -129,9 +129,15 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {//tak wiekszy niz x godzin
                 probabilitySum += 35;
 
-                if(srednioCieplejNiz(18)){
+                if(srednioCieplejNiz(20)){
+                    probabilitySum += 25;
+                   //koniec suma 85
+
+                }
+                else
+                {
                     probabilitySum += -25;
-                    if(czyJestWilgotno())
+                     if(czyJestWilgotno())
                     {
                         probabilitySum += 5; // koniec suma 40
                     }
@@ -139,17 +145,27 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                     {
                         probabilitySum += -3; //koniec suma 32
                     }
-
-                }
-                else
-                {
-                    probabilitySum += 25;//koniec suma 85
                 }
             }
             else
             {// nie mniejszy niz x godzin
                 probabilitySum += 5;
-                if (srednioCieplejNiz(18))
+                if (srednioCieplejNiz(20))
+                {
+                    
+                    probabilitySum += 25;
+
+                    if(czyCisnienieJestMale())
+                    {
+                        probabilitySum += 5;//koniec 60
+                    }
+                    else
+                    {
+                        probabilitySum += -3;//koniec 52
+                    }
+                    
+                }
+                else
                 {
                     probabilitySum += -25;
                     
@@ -160,19 +176,6 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                     else
                     {
                         probabilitySum += -3; //koniec 2
-                    }
-                }
-                else
-                {
-                    probabilitySum += 25;
-
-                    if(czyCisnienieJestMale())
-                    {
-                        probabilitySum += 5;//koniec 60
-                    }
-                    else
-                    {
-                        probabilitySum += -3;//koniec 52
                     }
                 }
             }
@@ -203,11 +206,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
         {
             probabilitySum +=15;
 
-            if(srednioCieplejNiz(18))
-            {
-                probabilitySum += -10; //koniec suma 30
-            }
-            else
+            if(srednioCieplejNiz(20))
             {
                 probabilitySum += 25;
             
@@ -215,7 +214,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {
                 probabilitySum += 7;
 
-                if (srednioCieplejNiz(18))
+                if (srednioCieplejNiz(20))
                 {
                     probabilitySum += -25; // koniec 47
                 }
@@ -228,15 +227,21 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {
                 probabilitySum += -5;
 
-                if (srednioCieplejNiz(18))
+                if (srednioCieplejNiz(20))
                 {
-                    probabilitySum += -25; // koniec 35
+                    probabilitySum += 25; // koniec 85
+                    
                 }
                 else
                 {
-                probabilitySum += 25; // koniec 85
+                probabilitySum += -25; // koniec 35
                 }
             }
+            }
+           
+            else
+            {
+                probabilitySum += -10; //koniec suma 30
             }
 
         }
@@ -254,26 +259,28 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 {
                     probabilitySum += 5;
 
-                    if(srednioCieplejNiz(18))
+                    if(srednioCieplejNiz(20))
                     {
-                        probabilitySum += -35; //koniec 35
+                       probabilitySum += 10;//koniec 80
                     }
                     else
                     {
-                        probabilitySum += 10;//koniec 80
+                        
+                         probabilitySum += -35; //koniec 35
                     }
                 }
                 else
                 {
                     probabilitySum += -3;
                     
-                    if(srednioCieplejNiz(18))
+                    if(srednioCieplejNiz(20))
                     {
-                        probabilitySum += -35;// koniec 27
+                         probabilitySum += 10; //koniec 62
+                        
                     }
                     else
                     {
-                        probabilitySum += 10; //koniec 62
+                       probabilitySum += -35;// koniec 27
                     }
                 }
             }
@@ -285,13 +292,14 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 {
                     probabilitySum +=5;
 
-                    if(srednioCieplejNiz(18))
+                    if(srednioCieplejNiz(20))
                     {
-                        probabilitySum += -25; // koniec 35
+                        probabilitySum += 25;// koniec 85 
+                       
                     }
                     else
                     {
-                        probabilitySum += 25;// koniec 85 
+                         probabilitySum += -25; // koniec 35
                     }
                 }
                 else
@@ -302,26 +310,28 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                     {
                         probabilitySum += 7;
 
-                        if(srednioCieplejNiz(18))
+                        if(srednioCieplejNiz(20))
                         {
-                            probabilitySum += -25; //koniec 34
+                            probabilitySum += 25;// koniec 84
+                            
                         }
                         else
                         {
-                            probabilitySum += 25;// koniec 84
+                            probabilitySum += -25; //koniec 34
                         }
                     }
                     else
                     {
                         probabilitySum += -5;
 
-                         if(srednioCieplejNiz(18))
+                         if(srednioCieplejNiz(1))
                         {
-                            probabilitySum += -25; //koniec 34
+                            probabilitySum += 25;// koniec 84
+                           
                         }
                         else
                         {
-                            probabilitySum += 25;// koniec 84
+                             probabilitySum += -25; //koniec 34
                         }
                     }
                 }
