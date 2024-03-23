@@ -16,14 +16,14 @@ bool czyBedziePadacWCiaguNastepnegoDnia()
 
 bool czyJestMokro()
 {
-    if ((float)(*stationDoc)["WaterLewel"] > 50.0f )
+    if ((float)(*stationDoc)["WaterLewel"] > 0.3f )// m3/m3
         return true;
     return false;
 }
 
 bool czyPadaloDuzoPrzezOstatnieDwaDni()
 {
-    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][0]["precip"] >  100.0f)//2 dni opadow w mm
+    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][0]["precip"] >  50.0f)//2 dni opadow w mm
         return true;
     return false;
 }
@@ -46,7 +46,7 @@ bool srednioCieplejNiz25StopniCelc(float stopnie = 20)
     return false;
 }
 
-bool cieplejNiz25StopniCelc()// srednia temperatura to moze wieksza niz 20?
+bool cieplejNiz25StopniCelc()
 {
     if((float)(*stationDoc)["Temperature"] > 25.f)
         return true;
