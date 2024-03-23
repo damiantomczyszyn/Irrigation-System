@@ -39,7 +39,7 @@ bool czasOdOstatniegoPodlewaniaWiekszyNizCzteryDni()
         return true;
     return false;
 }
-bool srednioCieplejNiz25StopniCelc(float stopnie = 20)
+bool srednioCieplejNiz(float stopnie = 20)
 {
     if((float)(*weatherApiDoc)["days"][1]["temp"] > stopnie)
         return true;
@@ -129,7 +129,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {//tak wiekszy niz x godzin
                 probabilitySum += 35;
 
-                if(srednioCieplejNiz25StopniCelc(25)){
+                if(srednioCieplejNiz(18)){
                     probabilitySum += -25;
                     if(czyJestWilgotno())
                     {
@@ -149,7 +149,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             else
             {// nie mniejszy niz x godzin
                 probabilitySum += 5;
-                if (srednioCieplejNiz25StopniCelc(25))
+                if (srednioCieplejNiz(18))
                 {
                     probabilitySum += -25;
                     
@@ -203,7 +203,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
         {
             probabilitySum +=15;
 
-            if(srednioCieplejNiz25StopniCelc(25))
+            if(srednioCieplejNiz(18))
             {
                 probabilitySum += -10; //koniec suma 30
             }
@@ -215,7 +215,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {
                 probabilitySum += 7;
 
-                if (srednioCieplejNiz25StopniCelc(25))
+                if (srednioCieplejNiz(18))
                 {
                     probabilitySum += -25; // koniec 47
                 }
@@ -228,7 +228,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {
                 probabilitySum += -5;
 
-                if (srednioCieplejNiz25StopniCelc(25))
+                if (srednioCieplejNiz(18))
                 {
                     probabilitySum += -25; // koniec 35
                 }
@@ -254,7 +254,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 {
                     probabilitySum += 5;
 
-                    if(srednioCieplejNiz25StopniCelc(25))
+                    if(srednioCieplejNiz(18))
                     {
                         probabilitySum += -35; //koniec 35
                     }
@@ -267,7 +267,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 {
                     probabilitySum += -3;
                     
-                    if(srednioCieplejNiz25StopniCelc(25))
+                    if(srednioCieplejNiz(18))
                     {
                         probabilitySum += -35;// koniec 27
                     }
@@ -285,7 +285,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 {
                     probabilitySum +=5;
 
-                    if(srednioCieplejNiz25StopniCelc(25))
+                    if(srednioCieplejNiz(18))
                     {
                         probabilitySum += -25; // koniec 35
                     }
@@ -302,7 +302,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                     {
                         probabilitySum += 7;
 
-                        if(srednioCieplejNiz25StopniCelc(25))
+                        if(srednioCieplejNiz(18))
                         {
                             probabilitySum += -25; //koniec 34
                         }
@@ -315,7 +315,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                     {
                         probabilitySum += -5;
 
-                         if(srednioCieplejNiz25StopniCelc(25))
+                         if(srednioCieplejNiz(18))
                         {
                             probabilitySum += -25; //koniec 34
                         }
@@ -329,7 +329,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
         }
     }
 
-    if( probabilitySum <= returnRandomInt() ) // losowanie na podstawie zebranej szansy włączenia podlewania lub nie
+    if( probabilitySum >= returnRandomInt() ) // losowanie na podstawie zebranej szansy włączenia podlewania lub nie
     {
         return true;
     }

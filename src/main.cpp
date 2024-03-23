@@ -416,7 +416,7 @@ unsigned long timerDelay = 5000;
       //Serial.println("wykonanie get do servera http");
       if (httpResponseCode>0) {
         //Serial.print("HTTP Response code: ");
-        Serial.println(httpResponseCode);
+        //Serial.println(httpResponseCode);
         dataJson = http.getString();
 
         
@@ -523,10 +523,10 @@ unsigned long timerDelay = 5000;
       
 
       int httpResponseCode = http.GET();
-      Serial.println("wykonanie get do servera http");
+     // Serial.println("wykonanie get do servera http");
       if (httpResponseCode>0) {
-        Serial.print("HTTP Response code: ");
-        Serial.println(httpResponseCode);
+      //  Serial.print("HTTP Response code: ");
+       // Serial.println(httpResponseCode);
         dataJson = http.getString();
 
         
@@ -600,6 +600,7 @@ void testujDzialanie2()
   else{
     Serial.println("\nNie włączono podlewania 0");
   }
+  delay(100);
 //Serial.println("Test zakonczony");
 //chwilka czekania aby skrypt pythona zmienił pliki
 }
