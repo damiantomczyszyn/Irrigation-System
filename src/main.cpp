@@ -413,9 +413,9 @@ unsigned long timerDelay = 5000;
       
 
       int httpResponseCode = http.GET();
-      Serial.println("wykonanie get do servera http");
+      //Serial.println("wykonanie get do servera http");
       if (httpResponseCode>0) {
-        Serial.print("HTTP Response code: ");
+        //Serial.print("HTTP Response code: ");
         Serial.println(httpResponseCode);
         dataJson = http.getString();
 
