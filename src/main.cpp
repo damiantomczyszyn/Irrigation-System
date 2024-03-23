@@ -22,7 +22,15 @@
 #define ZAW4 D3 //zawory
 #define ILOSC_ZAWOROW 4
 
+//Zmienne alg---------
 short dniBezPodlewania = 0;
+float srStopnie = 20;
+float szansaNaOpad = 50;
+float waterLewel = 0.3;
+float opadZDwóchDni = 10;
+short iloscDniBezPodlewania = 4;
+ /////------------
+
 const char *ssid = STASSID;
 const char *password = STAPSK;
 

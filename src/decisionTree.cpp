@@ -7,23 +7,25 @@ short probabilitySum = 0;
 DynamicJsonDocument* stationDoc = nullptr;
 DynamicJsonDocument* weatherApiDoc = nullptr;
 
+
+
 bool czyBedziePadacWCiaguNastepnegoDnia() 
 {
-    if((float)(*weatherApiDoc)["days"][2]["precipprob"] > 50.f)
+    if((float)(*weatherApiDoc)["days"][2]["precipprob"] > szansaNaOpad)
         return true;
     return false;
 }
 
 bool czyJestMokro()
 {
-    if ((float)(*stationDoc)["WaterLewel"] > 0.3f )// m3/m3
+    if ((float)(*stationDoc)["WaterLewel"] > waterLewel )// m3/m3
         return true;
     return false;
 }
 
 bool czyPadaloDuzoPrzezOstatnieDwaDni()
 {
-    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][0]["precip"] >  10.0f)//2 dni opadow w mm
+    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][0]["precip"] >  opadZDwóchDni)//2 dni opadow w mm
         return true;
     return false;
 }
@@ -35,7 +37,7 @@ int returnRandomInt()
 
 bool czasOdOstatniegoPodlewaniaWiekszyNizCzteryDni()
 {
-    if(dniBezPodlewania > 4)
+    if(dniBezPodlewania > iloscDniBezPodlewania)
         return true;
     return false;
 }
@@ -129,7 +131,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {//tak wiekszy niz x godzin
                 probabilitySum += 35;
 
-                if(srednioCieplejNiz(20)){
+                if(srednioCieplejNiz(srStopnie)){
                     probabilitySum += 25;
                    //koniec suma 85
 
@@ -150,7 +152,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             else
             {// nie mniejszy niz x godzin
                 probabilitySum += 5;
-                if (srednioCieplejNiz(20))
+                if (srednioCieplejNiz(srStopnie))
                 {
                     
                     probabilitySum += 25;
@@ -206,7 +208,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
         {
             probabilitySum +=15;
 
-            if(srednioCieplejNiz(20))
+            if(srednioCieplejNiz(srStopnie))
             {
                 probabilitySum += 25;
             
@@ -214,7 +216,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {
                 probabilitySum += 7;
 
-                if (srednioCieplejNiz(20))
+                if (srednioCieplejNiz(srStopnie))
                 {
                     probabilitySum += -25; // koniec 47
                 }
@@ -227,7 +229,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {
                 probabilitySum += -5;
 
-                if (srednioCieplejNiz(20))
+                if (srednioCieplejNiz(srStopnie))
                 {
                     probabilitySum += 25; // koniec 85
                     
@@ -259,7 +261,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 {
                     probabilitySum += 5;
 
-                    if(srednioCieplejNiz(20))
+                    if(srednioCieplejNiz(srStopnie))
                     {
                        probabilitySum += 10;//koniec 80
                     }
@@ -273,7 +275,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 {
                     probabilitySum += -3;
                     
-                    if(srednioCieplejNiz(20))
+                    if(srednioCieplejNiz(srStopnie))
                     {
                          probabilitySum += 10; //koniec 62
                         
@@ -292,7 +294,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 {
                     probabilitySum +=5;
 
-                    if(srednioCieplejNiz(20))
+                    if(srednioCieplejNiz(srStopnie))
                     {
                         probabilitySum += 25;// koniec 85 
                        
@@ -310,7 +312,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                     {
                         probabilitySum += 7;
 
-                        if(srednioCieplejNiz(20))
+                        if(srednioCieplejNiz(srStopnie))
                         {
                             probabilitySum += 25;// koniec 84
                             
