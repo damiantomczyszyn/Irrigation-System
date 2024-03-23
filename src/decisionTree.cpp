@@ -9,7 +9,7 @@ DynamicJsonDocument* weatherApiDoc = nullptr;
 
 bool czyBedziePadacWCiaguNastepnegoDnia() 
 {
-    if((float)(*weatherApiDoc)["days"][2]["precipprob"] > 10.f)
+    if((float)(*weatherApiDoc)["days"][2]["precipprob"] > 50.f)
         return true;
     return false;
 }
@@ -23,7 +23,7 @@ bool czyJestMokro()
 
 bool czyPadaloDuzoPrzezOstatnieDwaDni()
 {
-    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][0]["precip"] >  20.0f)//2 dni opadow w mm
+    if((float)(*weatherApiDoc)["days"][1]["precip"] + (float)(*weatherApiDoc)["days"][0]["precip"] >  10.0f)//2 dni opadow w mm
         return true;
     return false;
 }
