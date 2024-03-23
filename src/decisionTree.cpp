@@ -16,7 +16,7 @@ bool czyBedziePadacWCiaguNastepnegoDnia()
 
 bool czyJestMokro()
 {
-    if ((float)(*stationDoc)["WaterLewel"] > 0.35f )// m3/m3
+    if ((float)(*stationDoc)["WaterLewel"] > 0.3f )// m3/m3
         return true;
     return false;
 }

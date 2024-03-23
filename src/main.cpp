@@ -587,6 +587,7 @@ void testujDzialanie2()
     } else {
       Serial.print("Błąd podczas parsowania JSON: ");
       Serial.println(error.c_str());
+      
     }
   
 
