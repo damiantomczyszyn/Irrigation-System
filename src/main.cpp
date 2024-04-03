@@ -605,9 +605,12 @@ void testujDzialanie2()
   if(makeWatheringDecision(doc,doc2))
   {
     Serial.println("\nPodlewanie włączyło się 1");
+    dniBezPodlewania++;
+
   }
   else{
     Serial.println("\nNie włączono podlewania 0");
+    dniBezPodlewania=0;
   }
   delay(100);
 //Serial.println("Test zakonczony");
