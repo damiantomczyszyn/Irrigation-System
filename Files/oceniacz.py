@@ -1,9 +1,9 @@
 import json
 
-treshold_wather_level = 0.2
+treshold_wather_level = 0.25
 
 # Otwieramy plik test.txt w trybie do odczytu
-with open("test.txt", "r") as file:
+with open("test5.txt", "r") as file:
     lines = file.readlines()  # Odczytujemy wszystkie linie
     
     # Tworzymy pustą listę, do której będziemy zapisywać wyniki
@@ -59,8 +59,8 @@ for month in range(1, 13):
 
 
 
-for i in range(0,151):
-    if waterLevel[i] >= treshold_wather_level and podlewanie[i] == 0 or waterLevel[i] < treshold_wather_level and podlewanie[i] == 1:
+for i in range(0,150):
+    if waterLevel[i] >= treshold_wather_level and podlewanie[i+1] == 0 or waterLevel[i] < treshold_wather_level and podlewanie[i+1] == 1:
         # jesli bylo mokro i nie padalo lub jesli bylo sucho i padalo 
         skutecznosc.append(1)
         #print(waterLevel[i], "  ", podlewanie[i])
