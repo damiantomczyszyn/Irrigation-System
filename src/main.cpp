@@ -25,10 +25,10 @@
 //Zmienne alg---------
 short dniBezPodlewania = 0;
 float srStopnie = 18;
-float szansaNaOpad = 40;
-float waterLewel = 0.25;
-float opadZDwóchDni = 10;
-short iloscDniBezPodlewania = 7;
+float szansaNaOpad = 59;
+float waterLewel = 0.23;
+float opadZDwóchDni = 12;
+short iloscDniBezPodlewania = 4;
  /////------------
 
 const char *ssid = STASSID;
