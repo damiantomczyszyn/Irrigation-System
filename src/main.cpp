@@ -26,7 +26,7 @@
 short dniBezPodlewania = 0;
 float srStopnie = 20;
 float szansaNaOpad = 50;
-float waterLewel = 0.3;
+float waterLewel = 0.25;
 float opadZDwóchDni = 10;
 short iloscDniBezPodlewania = 4;
  /////------------
