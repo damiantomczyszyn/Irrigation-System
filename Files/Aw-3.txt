@@ -1,0 +1,604 @@
+1
+
+
+Nie włączono podlewania 0
+2
+
+
+Podlewanie włączyło się 1
+3
+
+
+Podlewanie włączyło się 1
+4
+
+
+Nie włączono podlewania 0
+5
+
+
+Podlewanie włączyło się 1
+6
+
+
+Podlewanie włączyło się 1
+7
+
+
+Podlewanie włączyło się 1
+8
+
+
+Podlewanie włączyło się 1
+9
+
+
+Podlewanie włączyło się 1
+10
+
+
+Podlewanie włączyło się 1
+11
+
+
+Podlewanie włączyło się 1
+12
+
+
+Podlewanie włączyło się 1
+13
+
+
+Podlewanie włączyło się 1
+14
+
+
+Podlewanie włączyło się 1
+15
+
+
+Podlewanie włączyło się 1
+16
+
+
+Podlewanie włączyło się 1
+17
+
+
+Podlewanie włączyło się 1
+18
+
+
+Nie włączono podlewania 0
+19
+
+
+Nie włączono podlewania 0
+20
+
+
+Podlewanie włączyło się 1
+21
+
+
+Podlewanie włączyło się 1
+22
+
+
+Podlewanie włączyło się 1
+23
+
+
+Podlewanie włączyło się 1
+24
+
+
+Podlewanie włączyło się 1
+25
+
+
+Podlewanie włączyło się 1
+26
+
+
+Podlewanie włączyło się 1
+27
+
+
+Podlewanie włączyło się 1
+28
+
+
+Podlewanie włączyło się 1
+29
+
+
+Podlewanie włączyło się 1
+30
+
+
+Podlewanie włączyło się 1
+31
+
+
+Nie włączono podlewania 0
+32
+
+
+Podlewanie włączyło się 1
+33
+
+
+Podlewanie włączyło się 1
+34
+
+
+Podlewanie włączyło się 1
+35
+
+
+Nie włączono podlewania 0
+36
+
+
+Nie włączono podlewania 0
+37
+
+
+Podlewanie włączyło się 1
+38
+
+
+Podlewanie włączyło się 1
+39
+
+
+Nie włączono podlewania 0
+40
+
+
+Podlewanie włączyło się 1
+41
+
+
+Podlewanie włączyło się 1
+42
+
+
+Podlewanie włączyło się 1
+43
+
+
+Podlewanie włączyło się 1
+44
+
+
+Nie włączono podlewania 0
+45
+
+
+Nie włączono podlewania 0
+46
+
+
+Podlewanie włączyło się 1
+47
+
+
+Podlewanie włączyło się 1
+48
+
+
+Podlewanie włączyło się 1
+49
+
+
+Podlewanie włączyło się 1
+50
+
+
+Podlewanie włączyło się 1
+51
+
+
+Podlewanie włączyło się 1
+52
+
+
+Nie włączono podlewania 0
+53
+
+
+Nie włączono podlewania 0
+54
+
+
+Podlewanie włączyło się 1
+55
+
+
+Podlewanie włączyło się 1
+56
+
+
+Nie włączono podlewania 0
+57
+
+
+Podlewanie włączyło się 1
+58
+
+
+Podlewanie włączyło się 1
+59
+
+
+Podlewanie włączyło się 1
+60
+
+
+Podlewanie włączyło się 1
+61
+
+
+Podlewanie włączyło się 1
+62
+
+
+Podlewanie włączyło się 1
+63
+
+
+Podlewanie włączyło się 1
+64
+
+
+Podlewanie włączyło się 1
+65
+
+
+Podlewanie włączyło się 1
+66
+
+
+Podlewanie włączyło się 1
+67
+
+
+Podlewanie włączyło się 1
+68
+
+
+Podlewanie włączyło się 1
+69
+
+
+Podlewanie włączyło się 1
+70
+
+
+Podlewanie włączyło się 1
+71
+
+
+Podlewanie włączyło się 1
+72
+
+
+Nie włączono podlewania 0
+73
+
+
+Podlewanie włączyło się 1
+74
+
+
+Podlewanie włączyło się 1
+75
+
+
+Podlewanie włączyło się 1
+76
+
+
+Nie włączono podlewania 0
+77
+
+
+Podlewanie włączyło się 1
+78
+
+
+Podlewanie włączyło się 1
+79
+
+
+Podlewanie włączyło się 1
+80
+
+
+Podlewanie włączyło się 1
+81
+
+
+Nie włączono podlewania 0
+82
+
+
+Nie włączono podlewania 0
+83
+
+
+Podlewanie włączyło się 1
+84
+
+
+Podlewanie włączyło się 1
+85
+
+
+Nie włączono podlewania 0
+86
+
+
+Podlewanie włączyło się 1
+87
+
+
+Nie włączono podlewania 0
+88
+
+
+Podlewanie włączyło się 1
+89
+
+
+Podlewanie włączyło się 1
+90
+
+
+Podlewanie włączyło się 1
+91
+
+
+Podlewanie włączyło się 1
+92
+
+
+Podlewanie włączyło się 1
+93
+
+
+Podlewanie włączyło się 1
+94
+
+
+Podlewanie włączyło się 1
+95
+
+
+Podlewanie włączyło się 1
+96
+
+
+Podlewanie włączyło się 1
+97
+
+
+Podlewanie włączyło się 1
+98
+
+
+Podlewanie włączyło się 1
+99
+
+
+Podlewanie włączyło się 1
+100
+
+
+Podlewanie włączyło się 1
+101
+
+
+Podlewanie włączyło się 1
+102
+
+
+Podlewanie włączyło się 1
+103
+
+
+Podlewanie włączyło się 1
+104
+
+
+Podlewanie włączyło się 1
+105
+
+
+Podlewanie włączyło się 1
+106
+
+
+Podlewanie włączyło się 1
+107
+
+
+Nie włączono podlewania 0
+108
+
+
+Podlewanie włączyło się 1
+109
+
+
+Podlewanie włączyło się 1
+110
+
+
+Podlewanie włączyło się 1
+111
+
+
+Nie włączono podlewania 0
+112
+
+
+Podlewanie włączyło się 1
+113
+
+
+Podlewanie włączyło się 1
+114
+
+
+Podlewanie włączyło się 1
+115
+
+
+Nie włączono podlewania 0
+116
+
+
+Nie włączono podlewania 0
+117
+
+
+Podlewanie włączyło się 1
+118
+
+
+Podlewanie włączyło się 1
+119
+
+
+Nie włączono podlewania 0
+120
+
+
+Podlewanie włączyło się 1
+121
+
+
+Podlewanie włączyło się 1
+122
+
+
+Podlewanie włączyło się 1
+123
+
+
+Podlewanie włączyło się 1
+124
+
+
+Podlewanie włączyło się 1
+125
+
+
+Nie włączono podlewania 0
+126
+
+
+Podlewanie włączyło się 1
+127
+
+
+Nie włączono podlewania 0
+128
+
+
+Nie włączono podlewania 0
+129
+
+
+Nie włączono podlewania 0
+130
+
+
+Podlewanie włączyło się 1
+131
+
+
+Nie włączono podlewania 0
+132
+
+
+Podlewanie włączyło się 1
+133
+
+
+Podlewanie włączyło się 1
+134
+
+
+Podlewanie włączyło się 1
+135
+
+
+Podlewanie włączyło się 1
+136
+
+
+Podlewanie włączyło się 1
+137
+
+
+Podlewanie włączyło się 1
+138
+
+
+Podlewanie włączyło się 1
+139
+
+
+Podlewanie włączyło się 1
+140
+
+
+Podlewanie włączyło się 1
+141
+
+
+Nie włączono podlewania 0
+142
+
+
+Podlewanie włączyło się 1
+143
+
+
+Podlewanie włączyło się 1
+144
+
+
+Podlewanie włączyło się 1
+145
+
+
+Podlewanie włączyło się 1
+146
+
+
+Podlewanie włączyło się 1
+147
+
+
+Podlewanie włączyło się 1
+148
+
+
+Nie włączono podlewania 0
+149
+
+
+Nie włączono podlewania 0
+150
+
+
+Podlewanie włączyło się 1
+151
+
+
+Podlewanie włączyło się 1s
