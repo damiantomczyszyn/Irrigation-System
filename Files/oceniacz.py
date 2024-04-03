@@ -34,7 +34,7 @@ with open("test.txt", "r") as file:
             sprawdzaj_linie = True  # Jeśli flaga jest ustawiona na False, zmieniamy na True, aby sprawdzić co trzecią linię
 
 # Wyświetlamy wynik
-print("Wynik:", podlewanie)
+#print("Wynik:", podlewanie)
 
 # Funkcja do odczytywania wartości parametru "WaterLevel" z pliku JSON
 def read_water_level(json_file):
@@ -51,7 +51,7 @@ for month in range(1, 13):
         try:
             water_level = read_water_level(json_file)  # Wywołujemy funkcję do odczytu wartości "WaterLevel"
             waterLevel.append(water_level)
-            print(f"Dla pliku {json_file}: Wartość parametru WaterLevel: {water_level}")
+            #print(f"Dla pliku {json_file}: Wartość parametru WaterLevel: {water_level}")
         except FileNotFoundError:
             pass  # Ignorujemy pliki, które nie istnieją
         except KeyError:
@@ -63,14 +63,22 @@ for i in range(0,151):
     if waterLevel[i] >= treshold_wather_level and podlewanie[i] == 0 or waterLevel[i] < treshold_wather_level and podlewanie[i] == 1:
         # jesli bylo mokro i nie padalo lub jesli bylo sucho i padalo 
         skutecznosc.append(1)
-        print(waterLevel[i], "  ", podlewanie[i])
+        #print(waterLevel[i], "  ", podlewanie[i])
     else:
         skutecznosc.append(0)
 
 
-print(skutecznosc)
+#print(skutecznosc)
     
+# Liczymy ile razy występuje wartość 1
+count_1 = skutecznosc.count(1)
 
+# Obliczamy procentowy udział
+total = len(skutecznosc)
+percentage_1 = (count_1 / total) * 100
+
+# Wyświetlamy wynik
+print(f"Ilość 1: {count_1}, co stanowi {percentage_1:.2f}% skutecznosci dla tresholdu wilgotnosci gleby {treshold_wather_level}")
 
 
 
