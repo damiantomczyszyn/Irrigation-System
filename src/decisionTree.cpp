@@ -179,7 +179,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
         if(spadnieWiecejNiz20MM())
         {
-            probabilitySum += -15;
+            probabilitySum += -20;
 
             if( dzisiejszyUVindeksWiekszyOd())
             {
@@ -192,7 +192,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
         }
         else
         {
-            probabilitySum +=15;
+            probabilitySum +=10;
 
             if(srednioCieplejNiz(srStopnie))
             {
@@ -282,7 +282,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
                     if(srednioCieplejNiz(srStopnie))
                     {
-                        probabilitySum += 25;// koniec 85 
+                        probabilitySum += 15;// koniec 85 
                        
                     }
                     else
@@ -292,7 +292,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 }
                 else
                 {
-                    probabilitySum += -3;
+                    probabilitySum += -5;
 
                     if(dzisiejszyUVindeksWiekszyOd())
                     {
@@ -300,7 +300,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
                         if(srednioCieplejNiz(srStopnie))
                         {
-                            probabilitySum += 25;// koniec 84
+                            probabilitySum += 15;// koniec 84
                             
                         }
                         else
@@ -314,7 +314,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
                          if(srednioCieplejNiz(1))
                         {
-                            probabilitySum += 25;// koniec 84
+                            probabilitySum += 15;// koniec 84
                            
                         }
                         else
