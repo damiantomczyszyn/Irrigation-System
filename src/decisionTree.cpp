@@ -103,7 +103,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
     //-------------------------
     if(czyJestMokro())
     {// tak jest mokro
-        probabilitySum += -50;
+        probabilitySum += -20;
 
         if (czyPadaloDuzoPrzezOstatnieDwaDni())
         {//tak padalo wiecej niz x litrow
@@ -115,10 +115,10 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             
             if(czasOdOstatniegoPodlewaniaWiekszyNizCzteryDni())
             {//tak wiekszy niz x godzin
-                probabilitySum += 15;
+                probabilitySum += 35;
 
                 if(srednioCieplejNiz(srStopnie)){
-                    probabilitySum += 20;
+                    probabilitySum += 25;
                    //koniec suma 85
 
                 }
@@ -179,7 +179,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
         if(spadnieWiecejNiz20MM())
         {
-            probabilitySum += -20;
+            probabilitySum += -15;
 
             if( dzisiejszyUVindeksWiekszyOd())
             {
@@ -192,7 +192,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
         }
         else
         {
-            probabilitySum +=10;
+            probabilitySum +=15;
 
             if(srednioCieplejNiz(srStopnie))
             {
@@ -282,7 +282,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
                     if(srednioCieplejNiz(srStopnie))
                     {
-                        probabilitySum += 15;// koniec 85 
+                        probabilitySum += 25;// koniec 85 
                        
                     }
                     else
@@ -292,7 +292,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                 }
                 else
                 {
-                    probabilitySum += -5;
+                    probabilitySum += -3;
 
                     if(dzisiejszyUVindeksWiekszyOd())
                     {
@@ -300,7 +300,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
                         if(srednioCieplejNiz(srStopnie))
                         {
-                            probabilitySum += 15;// koniec 84
+                            probabilitySum += 25;// koniec 84
                             
                         }
                         else
@@ -314,7 +314,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
                          if(srednioCieplejNiz(1))
                         {
-                            probabilitySum += 15;// koniec 84
+                            probabilitySum += 25;// koniec 84
                            
                         }
                         else
@@ -326,9 +326,9 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             }
         }
     }
-    if(probabilitySum<=0)
-    return false;
-
+    
+    if( probabilitySum <= 0 )
+        return false;
     if( probabilitySum >= returnRandomInt() ) // losowanie na podstawie zebranej szansy włączenia podlewania lub nie
     {
         return true;

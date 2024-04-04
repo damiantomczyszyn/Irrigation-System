@@ -1,7 +1,7 @@
-skutecznosc 62.24%
-wlaczyl a nie powinien: 56
+liczba bledow parsowania to: 8
+wlaczyl a nie powinien: 6
 nie wlaczyl a powinien: 0
-
+Ilość 1 : 139, z 145 co stanowi 95.86% skutecznosci dla tresholdu wilgotnosci gleby 0.3
 
 1
 
@@ -10,7 +10,7 @@ Nie włączono podlewania 0
 2
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 3
 
 
@@ -38,7 +38,7 @@ Nie włączono podlewania 0
 9
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 10
 
 
@@ -46,15 +46,15 @@ Nie włączono podlewania 0
 11
 
 
-Nie włączono podlewania 0
+Podlewanie włączyło się 1
 12
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 13
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 14
 
 
@@ -86,15 +86,15 @@ Nie włączono podlewania 0
 21
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 22
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 23
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 24
 
 
@@ -110,7 +110,7 @@ Nie włączono podlewania 0
 27
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 28
 
 
@@ -122,7 +122,7 @@ Nie włączono podlewania 0
 30
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 31
 
 
@@ -130,11 +130,11 @@ Nie włączono podlewania 0
 32
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 33
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 34
 
 
@@ -150,11 +150,11 @@ Nie włączono podlewania 0
 37
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 38
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 39
 
 
@@ -166,7 +166,7 @@ Nie włączono podlewania 0
 41
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 42
 
 
@@ -198,15 +198,15 @@ Nie włączono podlewania 0
 49
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 50
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 51
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 52
 
 
@@ -218,7 +218,7 @@ Nie włączono podlewania 0
 54
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 55
 
 
@@ -234,7 +234,7 @@ Nie włączono podlewania 0
 58
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 59
 
 
@@ -250,23 +250,23 @@ Nie włączono podlewania 0
 62
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 63
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 64
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 65
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 66
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 67
 
 
@@ -274,7 +274,7 @@ Nie włączono podlewania 0
 68
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 69
 
 
@@ -294,7 +294,7 @@ Nie włączono podlewania 0
 73
 
 
-Nie włączono podlewania 0
+Podlewanie włączyło się 1
 74
 
 
@@ -318,7 +318,7 @@ Nie włączono podlewania 0
 79
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 80
 
 
@@ -334,11 +334,11 @@ Nie włączono podlewania 0
 83
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 84
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 85
 
 
@@ -366,7 +366,7 @@ Nie włączono podlewania 0
 91
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 92
 
 
@@ -374,27 +374,27 @@ Nie włączono podlewania 0
 93
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 94
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 95
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 96
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 97
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 98
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 99
 
 
@@ -402,19 +402,19 @@ Nie włączono podlewania 0
 100
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 101
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 102
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 103
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 104
 
 
@@ -426,7 +426,7 @@ Nie włączono podlewania 0
 106
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 107
 
 
@@ -442,7 +442,7 @@ Nie włączono podlewania 0
 110
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 111
 
 
@@ -454,11 +454,11 @@ Nie włączono podlewania 0
 113
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 114
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 115
 
 
@@ -470,11 +470,11 @@ Nie włączono podlewania 0
 117
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 118
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 119
 
 
@@ -482,7 +482,7 @@ Nie włączono podlewania 0
 120
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 121
 
 
@@ -494,7 +494,7 @@ Nie włączono podlewania 0
 123
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 124
 
 
@@ -506,7 +506,7 @@ Nie włączono podlewania 0
 126
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 127
 
 
@@ -534,15 +534,15 @@ Nie włączono podlewania 0
 133
 
 
-Nie włączono podlewania 0
+Podlewanie włączyło się 1
 134
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 135
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 136
 
 
@@ -550,25 +550,25 @@ Nie włączono podlewania 0
 137
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 138
 Błąd podczas parsowania JSON: InvalidInput
 Błąd podczas parsowania JSON: InvalidInput
 
 
-Nie włączono podlewania 0
+Podlewanie włączyło się 1
 139
 Błąd podczas parsowania JSON: InvalidInput
 Błąd podczas parsowania JSON: InvalidInput
 
 
-Nie włączono podlewania 0
+Podlewanie włączyło się 1
 140
 Błąd podczas parsowania JSON: InvalidInput
 Błąd podczas parsowania JSON: InvalidInput
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 141
 Błąd podczas parsowania JSON: InvalidInput
 
@@ -577,15 +577,15 @@ Nie włączono podlewania 0
 142
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 143
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 144
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 145
 Błąd podczas parsowania JSON: InvalidInput
 Błąd podczas parsowania JSON: InvalidInput
@@ -597,13 +597,13 @@ Błąd podczas parsowania JSON: InvalidInput
 Błąd podczas parsowania JSON: InvalidInput
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 147
 Błąd podczas parsowania JSON: InvalidInput
 Błąd podczas parsowania JSON: InvalidInput
 
 
-Nie włączono podlewania 0
+Podlewanie włączyło się 1
 148
 Błąd podczas parsowania JSON: InvalidInput
 
@@ -616,8 +616,8 @@ Nie włączono podlewania 0
 150
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
 151
 
 
-Podlewanie włączyło się 1
+Nie włączono podlewania 0
