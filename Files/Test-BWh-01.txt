@@ -1,4 +1,7 @@
-
+liczba bledow parsowania to: 0
+wlaczyl a nie powinien: 0
+nie wlaczyl a powinien: 77
+Ilość 1 : 74, z 151 co stanowi 49.01% skutecznosci dla tresholdu wilgotnosci gleby 0.3
 
 
 1

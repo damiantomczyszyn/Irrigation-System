@@ -35,7 +35,7 @@ int returnRandomInt()
     return rand()%101; // random int 0 - 100
 }
 
-bool czasOdOstatniegoPodlewaniaWiekszyNizCzteryDni()
+bool czasOdOstatniegoPodlewaniaWiekszyNizDni()
 {
     if(dniBezPodlewania > iloscDniBezPodlewania)
         return true;
@@ -127,7 +127,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
         {//nie padalo wiecej niz x litrow
             probabilitySum += 25;
             
-            if(czasOdOstatniegoPodlewaniaWiekszyNizCzteryDni())
+            if(czasOdOstatniegoPodlewaniaWiekszyNizDni())
             {//tak wiekszy niz x godzin
                 probabilitySum += 35;
 
@@ -185,7 +185,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
     }
     else
     {//nie jest mokro
-     probabilitySum += 35;
+     probabilitySum += 40;
 
         if (czyBedziePadacWCiaguNastepnegoDnia() )
         {//tak bedzie padac
@@ -197,7 +197,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
             if( dzisiejszyUVindeksWiekszyOd())
             {
-                probabilitySum += 5; // koniec 15
+                probabilitySum += 10; // koniec 15
             }
             else
             {
@@ -214,7 +214,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             
             if(dzisiejszyUVindeksWiekszyOd())
             {
-                probabilitySum += 7;
+                probabilitySum += 10;
 
                 if (srednioCieplejNiz(srStopnie))
                 {
@@ -253,9 +253,9 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
         {//nie bedzie padac
             probabilitySum +=15;
 
-            if(czasOdOstatniegoPodlewaniaWiekszyNizCzteryDni())
+            if(czasOdOstatniegoPodlewaniaWiekszyNizDni())
             {
-                probabilitySum +=15;
+                probabilitySum +=25;
                 
                 if(czyCisnienieJestMale())
                 {
@@ -341,6 +341,9 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
         }
     }
 
+
+
+    
     if( probabilitySum >= returnRandomInt() ) // losowanie na podstawie zebranej szansy włączenia podlewania lub nie
     {
         return true;
