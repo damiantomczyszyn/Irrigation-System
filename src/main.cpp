@@ -24,10 +24,10 @@
 
 //Zmienne alg---------
 short dniBezPodlewania = 0;
-float srStopnie = 25;
-float szansaNaOpad = 30;
-float waterLewel = 0.3;
-float opadZDwóchDni = 10;
+float srStopnie = 22;
+float szansaNaOpad = 25;
+float waterLewel = 0.29;
+float opadZDwóchDni = 5;
 short iloscDniBezPodlewania = 30;
  /////------------
 

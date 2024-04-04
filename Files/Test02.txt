@@ -1,7 +1,6 @@
-skutecznosc 62.24%
+skutecznosc: 62.24%
 wlaczyl a nie powinien: 56
 nie wlaczyl a powinien: 0
-
 
 1
 
