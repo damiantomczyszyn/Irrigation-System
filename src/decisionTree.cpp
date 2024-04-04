@@ -92,25 +92,11 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
     //2 -jutro
     probabilitySum = 0;
 
-   // Serial.println("\nDni bez podlewania w makeWathering");
-   // Serial.println(dniBezPodlewania);
-    // Serial.println("\nmake wathering decision doc");
-    // serializeJsonPretty(doc["days"], Serial);
-    // Serial.println("\nmake wathering decision doc2");
-    // serializeJsonPretty(doc2, Serial);
-    
+
     weatherApiDoc = &doc;
     stationDoc = &doc2;
     Serial.println("");
     float temp = (*weatherApiDoc)["days"][0]["temp"];
-    // Serial.print("TEMPERATURKA W FLOAT: ");
-    // Serial.println(temp);
-    // Serial.println("json z wskaznika0");
-    // serializeJson((*weatherApiDoc)["days"][0]["temp"], Serial);
-    // Serial.println("json z wskaznika1");
-    // serializeJson((*weatherApiDoc)["days"][1], Serial);
-    // Serial.println("json z wskaznika2");
-    // serializeJson((*weatherApiDoc)["days"][2], Serial);
 
 
 
@@ -129,7 +115,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             
             if(czasOdOstatniegoPodlewaniaWiekszyNizCzteryDni())
             {//tak wiekszy niz x godzin
-                probabilitySum += 35;
+                probabilitySum += 15;
 
                 if(srednioCieplejNiz(srStopnie)){
                     probabilitySum += 25;
@@ -340,6 +326,8 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             }
         }
     }
+    if(probabilitySum<=0)
+    return false;
 
     if( probabilitySum >= returnRandomInt() ) // losowanie na podstawie zebranej szansy włączenia podlewania lub nie
     {
