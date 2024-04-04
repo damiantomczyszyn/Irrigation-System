@@ -1,9 +1,9 @@
 import json
 
-treshold_wather_level = 0.25
+treshold_wather_level = 0.3
 
 # Otwieramy plik test.txt w trybie do odczytu
-with open("test4.txt", "r") as file:
+with open("test11.txt", "r") as file:
     lines = file.readlines()  # Odczytujemy wszystkie linie
     
     # Tworzymy pustą listę, do której będziemy zapisywać wyniki
@@ -62,16 +62,17 @@ nie_wlaczenia = 0
 bledy = podlewanie.count(-1)
 
 for i in range(0,151):
-    if waterLevel[i] >= treshold_wather_level and podlewanie[i+1] == 0 or waterLevel[i] < treshold_wather_level and podlewanie[i+1] == 1:
+    print("dzien ", i+1,' ',end='\t')
+    if waterLevel[i] >= treshold_wather_level and podlewanie[i] == 0 or waterLevel[i] < treshold_wather_level and podlewanie[i] == 1:
         # jesli bylo mokro i nie padalo lub jesli bylo sucho i padalo 
         skutecznosc.append(1)
         print(waterLevel[i], "  ", podlewanie[i+1], " poprawna ocena 1")
     else:
         skutecznosc.append(0)
         print(waterLevel[i], "  ",podlewanie[i+1], " zla ocena 0")
-        if podlewanie[i+1] == 0:
+        if podlewanie[i] == 0:
             nie_wlaczenia = nie_wlaczenia + 1
-        elif podlewanie[i+1] == 1:
+        elif podlewanie[i] == 1:
             wlaczenia = wlaczenia + 1
         else:
             continue
@@ -92,6 +93,7 @@ percentage_1 = (count_1 / total) * 100
 # Wyświetlamy wynik
 print(f"Ilość 1 : {count_1}, z {total} co stanowi {percentage_1:.2f}% skutecznosci dla tresholdu wilgotnosci gleby {treshold_wather_level}")
 print(f"calkowita ilosc jest redukowana o liczbe bledow parsowania o ile wystapia")
+
 
 
 
