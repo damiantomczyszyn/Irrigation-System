@@ -117,7 +117,7 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
     //-------------------------
     if(czyJestMokro())
     {// tak jest mokro
-        probabilitySum += -40;
+        probabilitySum += -20;
 
         if (czyPadaloDuzoPrzezOstatnieDwaDni())
         {//tak padalo wiecej niz x litrow
