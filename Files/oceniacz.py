@@ -66,10 +66,10 @@ for i in range(0,151):
     if waterLevel[i] >= treshold_wather_level and podlewanie[i] == 0 or waterLevel[i] < treshold_wather_level and podlewanie[i] == 1:
         # jesli bylo mokro i nie padalo lub jesli bylo sucho i padalo 
         skutecznosc.append(1)
-        print(waterLevel[i], "  ", podlewanie[i+1], " poprawna ocena 1")
+        print(waterLevel[i], "  ", podlewanie[i], " poprawna ocena 1")
     else:
         skutecznosc.append(0)
-        print(waterLevel[i], "  ",podlewanie[i+1], " zla ocena 0")
+        print(waterLevel[i], "  ",podlewanie[i], " zla ocena 0")
         if podlewanie[i] == 0:
             nie_wlaczenia = nie_wlaczenia + 1
         elif podlewanie[i] == 1:
