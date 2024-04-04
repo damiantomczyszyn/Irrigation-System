@@ -28,7 +28,7 @@ float srStopnie = 25;
 float szansaNaOpad = 40;
 float waterLewel = 0.29;
 float opadZDwóchDni = 8;
-short iloscDniBezPodlewania = 20;
+short iloscDniBezPodlewania = 25;
  /////------------
 
 const char *ssid = STASSID;
