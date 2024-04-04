@@ -1,0 +1,620 @@
+skutecznosc: 59%
+
+1
+
+
+Nie włączono podlewania 0
+2
+
+
+Podlewanie włączyło się 1
+3
+
+
+Nie włączono podlewania 0
+4
+
+
+Nie włączono podlewania 0
+5
+
+
+Nie włączono podlewania 0
+6
+
+
+Nie włączono podlewania 0
+7
+
+
+Nie włączono podlewania 0
+8
+
+
+Nie włączono podlewania 0
+9
+
+
+Podlewanie włączyło się 1
+10
+
+
+Nie włączono podlewania 0
+11
+
+
+Nie włączono podlewania 0
+12
+
+
+Podlewanie włączyło się 1
+13
+
+
+Podlewanie włączyło się 1
+14
+
+
+Nie włączono podlewania 0
+15
+
+
+Nie włączono podlewania 0
+16
+
+
+Podlewanie włączyło się 1
+17
+
+
+Podlewanie włączyło się 1
+18
+
+
+Nie włączono podlewania 0
+19
+
+
+Nie włączono podlewania 0
+20
+
+
+Nie włączono podlewania 0
+21
+
+
+Podlewanie włączyło się 1
+22
+
+
+Podlewanie włączyło się 1
+23
+
+
+Podlewanie włączyło się 1
+24
+
+
+Nie włączono podlewania 0
+25
+
+
+Nie włączono podlewania 0
+26
+
+
+Nie włączono podlewania 0
+27
+
+
+Podlewanie włączyło się 1
+28
+
+
+Nie włączono podlewania 0
+29
+
+
+Nie włączono podlewania 0
+30
+
+
+Podlewanie włączyło się 1
+31
+
+
+Nie włączono podlewania 0
+32
+
+
+Podlewanie włączyło się 1
+33
+
+
+Podlewanie włączyło się 1
+34
+
+
+Nie włączono podlewania 0
+35
+
+
+Nie włączono podlewania 0
+36
+
+
+Nie włączono podlewania 0
+37
+
+
+Podlewanie włączyło się 1
+38
+
+
+Podlewanie włączyło się 1
+39
+
+
+Nie włączono podlewania 0
+40
+
+
+Nie włączono podlewania 0
+41
+
+
+Podlewanie włączyło się 1
+42
+
+
+Nie włączono podlewania 0
+43
+
+
+Nie włączono podlewania 0
+44
+
+
+Nie włączono podlewania 0
+45
+
+
+Nie włączono podlewania 0
+46
+
+
+Nie włączono podlewania 0
+47
+
+
+Nie włączono podlewania 0
+48
+
+
+Nie włączono podlewania 0
+49
+
+
+Podlewanie włączyło się 1
+50
+
+
+Podlewanie włączyło się 1
+51
+
+
+Podlewanie włączyło się 1
+52
+
+
+Nie włączono podlewania 0
+53
+
+
+Nie włączono podlewania 0
+54
+
+
+Podlewanie włączyło się 1
+55
+
+
+Nie włączono podlewania 0
+56
+
+
+Nie włączono podlewania 0
+57
+
+
+Nie włączono podlewania 0
+58
+
+
+Podlewanie włączyło się 1
+59
+
+
+Nie włączono podlewania 0
+60
+
+
+Nie włączono podlewania 0
+61
+
+
+Nie włączono podlewania 0
+62
+
+
+Podlewanie włączyło się 1
+63
+
+
+Podlewanie włączyło się 1
+64
+
+
+Podlewanie włączyło się 1
+65
+
+
+Podlewanie włączyło się 1
+66
+
+
+Podlewanie włączyło się 1
+67
+
+
+Nie włączono podlewania 0
+68
+
+
+Podlewanie włączyło się 1
+69
+
+
+Nie włączono podlewania 0
+70
+
+
+Nie włączono podlewania 0
+71
+
+
+Nie włączono podlewania 0
+72
+
+
+Nie włączono podlewania 0
+73
+
+
+Nie włączono podlewania 0
+74
+
+
+Nie włączono podlewania 0
+75
+
+
+Nie włączono podlewania 0
+76
+
+
+Nie włączono podlewania 0
+77
+
+
+Nie włączono podlewania 0
+78
+
+
+Nie włączono podlewania 0
+79
+
+
+Podlewanie włączyło się 1
+80
+
+
+Nie włączono podlewania 0
+81
+
+
+Nie włączono podlewania 0
+82
+
+
+Nie włączono podlewania 0
+83
+
+
+Podlewanie włączyło się 1
+84
+
+
+Podlewanie włączyło się 1
+85
+
+
+Nie włączono podlewania 0
+86
+
+
+Podlewanie włączyło się 1
+87
+
+
+Nie włączono podlewania 0
+88
+
+
+Nie włączono podlewania 0
+89
+
+
+Nie włączono podlewania 0
+90
+
+
+Nie włączono podlewania 0
+91
+
+
+Podlewanie włączyło się 1
+92
+
+
+Nie włączono podlewania 0
+93
+
+
+Podlewanie włączyło się 1
+94
+
+
+Podlewanie włączyło się 1
+95
+
+
+Podlewanie włączyło się 1
+96
+
+
+Podlewanie włączyło się 1
+97
+
+
+Podlewanie włączyło się 1
+98
+
+
+Podlewanie włączyło się 1
+99
+
+
+Nie włączono podlewania 0
+100
+
+
+Podlewanie włączyło się 1
+101
+
+
+Podlewanie włączyło się 1
+102
+
+
+Podlewanie włączyło się 1
+103
+
+
+Podlewanie włączyło się 1
+104
+
+
+Podlewanie włączyło się 1
+105
+
+
+Nie włączono podlewania 0
+106
+
+
+Podlewanie włączyło się 1
+107
+
+
+Nie włączono podlewania 0
+108
+
+
+Nie włączono podlewania 0
+109
+
+
+Nie włączono podlewania 0
+110
+
+
+Podlewanie włączyło się 1
+111
+
+
+Nie włączono podlewania 0
+112
+
+
+Nie włączono podlewania 0
+113
+
+
+Podlewanie włączyło się 1
+114
+
+
+Podlewanie włączyło się 1
+115
+
+
+Nie włączono podlewania 0
+116
+
+
+Nie włączono podlewania 0
+117
+
+
+Podlewanie włączyło się 1
+118
+
+
+Podlewanie włączyło się 1
+119
+
+
+Nie włączono podlewania 0
+120
+
+
+Podlewanie włączyło się 1
+121
+
+
+Nie włączono podlewania 0
+122
+
+
+Nie włączono podlewania 0
+123
+
+
+Podlewanie włączyło się 1
+124
+
+
+Nie włączono podlewania 0
+125
+
+
+Nie włączono podlewania 0
+126
+
+
+Podlewanie włączyło się 1
+127
+
+
+Nie włączono podlewania 0
+128
+
+
+Nie włączono podlewania 0
+129
+
+
+Nie włączono podlewania 0
+130
+
+
+Nie włączono podlewania 0
+131
+
+
+Nie włączono podlewania 0
+132
+
+
+Nie włączono podlewania 0
+133
+
+
+Nie włączono podlewania 0
+134
+
+
+Podlewanie włączyło się 1
+135
+
+
+Podlewanie włączyło się 1
+136
+
+
+Nie włączono podlewania 0
+137
+
+
+Podlewanie włączyło się 1
+138
+Błąd podczas parsowania JSON: InvalidInput
+
+
+Nie włączono podlewania 0
+139
+Błąd podczas parsowania JSON: InvalidInput
+Błąd podczas parsowania JSON: InvalidInput
+
+
+Nie włączono podlewania 0
+140
+Błąd podczas parsowania JSON: InvalidInput
+Błąd podczas parsowania JSON: InvalidInput
+
+
+Podlewanie włączyło się 1
+141
+Błąd podczas parsowania JSON: InvalidInput
+Błąd podczas parsowania JSON: InvalidInput
+
+
+Nie włączono podlewania 0
+142
+
+
+Podlewanie włączyło się 1
+143
+
+
+Podlewanie włączyło się 1
+144
+
+
+Podlewanie włączyło się 1
+145
+Błąd podczas parsowania JSON: InvalidInput
+
+
+Nie włączono podlewania 0
+146
+Błąd podczas parsowania JSON: InvalidInput
+Błąd podczas parsowania JSON: InvalidInput
+
+
+Podlewanie włączyło się 1
+147
+Błąd podczas parsowania JSON: InvalidInput
+Błąd podczas parsowania JSON: InvalidInput
+
+
+Nie włączono podlewania 0
+148
+Błąd podczas parsowania JSON: InvalidInput
+Błąd podczas parsowania JSON: InvalidInput
+
+
+Nie włączono podlewania 0
+149
+
+
+Nie włączono podlewania 0
+150
+
+
+Podlewanie włączyło się 1
+151
+
+
+Podlewanie włączyło się 1
