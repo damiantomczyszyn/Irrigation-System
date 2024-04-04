@@ -3,7 +3,7 @@ import json
 treshold_wather_level = 0.3
 
 # Otwieramy plik test.txt w trybie do odczytu
-with open("test11.txt", "r") as file:
+with open("test01.txt", "r") as file:
     lines = file.readlines()  # Odczytujemy wszystkie linie
     
     # Tworzymy pustą listę, do której będziemy zapisywać wyniki
@@ -53,6 +53,7 @@ for month in range(1, 13):
             waterLevel.append(water_level)
             #print(f"Dla pliku {json_file}: Wartość parametru WaterLevel: {water_level}")
         except FileNotFoundError:
+            
             pass  # Ignorujemy pliki, które nie istnieją
         except KeyError:
             print(f"Dla pliku {json_file}: Brak parametru WaterLevel")
@@ -63,11 +64,17 @@ bledy = podlewanie.count(-1)
 
 for i in range(0,151):
     print("dzien ", i+1,' ',end='\t')
-    if waterLevel[i] >= treshold_wather_level and podlewanie[i] == 0 or waterLevel[i] < treshold_wather_level and podlewanie[i] == 1:
-        # jesli bylo mokro i nie padalo lub jesli bylo sucho i padalo 
+    if waterLevel[i] >= treshold_wather_level and podlewanie[i] == 0 or waterLevel[i] < treshold_wather_level and podlewanie[i] == 1 :
+        # jesli bylo mokro i nie padalo lub jesli bylo sucho i padalo
+        if podlewanie[i] == -1:
+            continue
         skutecznosc.append(1)
         print(waterLevel[i], "  ", podlewanie[i], " poprawna ocena 1")
+        
     else:
+        if podlewanie[i] == -1:
+            print("blad")
+            continue
         skutecznosc.append(0)
         print(waterLevel[i], "  ",podlewanie[i], " zla ocena 0")
         if podlewanie[i] == 0:
@@ -87,7 +94,7 @@ print(f"nie wlaczyl a powinien: {nie_wlaczenia}")
 count_1 = skutecznosc.count(1)
 
 # Obliczamy procentowy udział
-total = len(skutecznosc) - bledy
+total = len(skutecznosc)
 percentage_1 = (count_1 / total) * 100
 
 # Wyświetlamy wynik
