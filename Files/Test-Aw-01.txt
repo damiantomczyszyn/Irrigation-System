@@ -1,0 +1,3 @@
+wlaczyl a nie powinien: 4
+nie wlaczyl a powinien: 38
+Ilość 1 : 109, z 151 co stanowi 72.19% skutecznosci dla tresholdu wilgotnosci gleby 0.3
