@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-04-21T07:57:02.126Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0" etag="s8hSzOYEt5JiXeqcjX2T" version="23.1.1" type="github" pages="6">
+<mxfile host="app.diagrams.net" modified="2024-04-21T07:57:44.231Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0" etag="0LYtKaIbj6yylEcnNzf5" version="23.1.1" type="github" pages="6">
   <diagram name="Wstepny diagram" id="2a216829-ef6e-dabb-86c1-c78162f3ba2b">
     <mxGraphModel dx="1687" dy="911" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
       <root>
@@ -1584,7 +1584,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Drzewo-do-magisterki-Bsh" id="fvi8pd355D4rx5upUQSj">
-    <mxGraphModel dx="4522" dy="1548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="2579" dy="499" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="_9bv5utsI145THLdbXMA-0" />
         <mxCell id="_9bv5utsI145THLdbXMA-1" parent="_9bv5utsI145THLdbXMA-0" />
@@ -2008,7 +2008,7 @@
             <mxPoint x="246.5999999999999" y="657.56" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="_9bv5utsI145THLdbXMA-142" value="duże, podlewaj" style="ellipse;whiteSpace=wrap;html=1;" parent="_9bv5utsI145THLdbXMA-1" vertex="1">
+        <mxCell id="_9bv5utsI145THLdbXMA-142" value="32%" style="ellipse;whiteSpace=wrap;html=1;" parent="_9bv5utsI145THLdbXMA-1" vertex="1">
           <mxGeometry x="692" y="741.25" width="90" height="60" as="geometry" />
         </mxCell>
         <mxCell id="_9bv5utsI145THLdbXMA-143" value="40%" style="ellipse;whiteSpace=wrap;html=1;" parent="_9bv5utsI145THLdbXMA-1" vertex="1">
@@ -2540,7 +2540,7 @@
             <mxPoint x="585" y="750" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="M18K-eaIQ0ufDvO-AKo7-26" value="duże, podlewaj" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="M18K-eaIQ0ufDvO-AKo7-26" value="32%" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="457" y="743.75" width="90" height="60" as="geometry" />
         </mxCell>
         <mxCell id="M18K-eaIQ0ufDvO-AKo7-27" value="40%" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
