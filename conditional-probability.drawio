@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-04-21T08:54:45.853Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0" etag="e4hXTDo0CCcJlftMqkRO" version="23.1.1" type="github" pages="6">
+<mxfile host="app.diagrams.net" modified="2024-04-21T08:58:05.848Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0" etag="L108fOZyC2tFG3DMvT2X" version="23.1.1" type="github" pages="6">
   <diagram name="Wstepny diagram" id="2a216829-ef6e-dabb-86c1-c78162f3ba2b">
     <mxGraphModel dx="1687" dy="911" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
       <root>
@@ -2095,7 +2095,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram name="sucha-gleba" id="hApHtQ2US2TclGjER59y">
+  <diagram name="Sucha-gleba" id="hApHtQ2US2TclGjER59y">
     <mxGraphModel dx="2514" dy="911" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="ItYvwPrSk0cCcX9RfkWu-0" />
@@ -2137,10 +2137,10 @@
           <mxGeometry x="-19.85" y="130" width="101.25" height="40" as="geometry" />
         </mxCell>
         <mxCell id="i5N_ecjFqRNFi-K6-QG4-11" value="+15" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="ItYvwPrSk0cCcX9RfkWu-1">
-          <mxGeometry x="-109.85" y="210" width="60" height="30" as="geometry" />
+          <mxGeometry x="-137.95" y="230" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="i5N_ecjFqRNFi-K6-QG4-12" value="-10" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="ItYvwPrSk0cCcX9RfkWu-1">
-          <mxGeometry x="190" y="220" width="60" height="30" as="geometry" />
+          <mxGeometry x="139" y="221.25" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="i5N_ecjFqRNFi-K6-QG4-13" value="-15" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="ItYvwPrSk0cCcX9RfkWu-1">
           <mxGeometry x="300.75" y="325" width="60" height="30" as="geometry" />
@@ -2430,6 +2430,12 @@
             <mxPoint x="101.4" y="643.75" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="R--pJ_60LjyaWTAFs3uE-0" value="Nie" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="ItYvwPrSk0cCcX9RfkWu-1">
+          <mxGeometry x="-109.85000000000002" y="251.25" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="R--pJ_60LjyaWTAFs3uE-1" value="Tak" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="ItYvwPrSk0cCcX9RfkWu-1">
+          <mxGeometry x="78.99999999999997" y="245" width="60" height="20" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
@@ -2438,8 +2444,8 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="M18K-eaIQ0ufDvO-AKo7-1" value="&lt;div&gt;czy dzisiaj spadło dużo wody&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="687" y="210" width="60" height="30" as="geometry" />
+        <mxCell id="M18K-eaIQ0ufDvO-AKo7-1" value="czy dzisiaj spadło więcej niż 20mm wody" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="687" y="210" width="73" height="50" as="geometry" />
         </mxCell>
         <mxCell id="M18K-eaIQ0ufDvO-AKo7-2" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.914;entryY=-0.044;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="M18K-eaIQ0ufDvO-AKo7-1" target="M18K-eaIQ0ufDvO-AKo7-5">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -2472,10 +2478,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="M18K-eaIQ0ufDvO-AKo7-9" value="+0" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="782" y="230" width="60" height="30" as="geometry" />
+          <mxGeometry x="782" y="250" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="M18K-eaIQ0ufDvO-AKo7-10" value="+25" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="617" y="240" width="60" height="30" as="geometry" />
+          <mxGeometry x="627" y="250" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="M18K-eaIQ0ufDvO-AKo7-11" value="+35" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="687" y="360" width="60" height="30" as="geometry" />
@@ -2586,7 +2592,13 @@
           <mxGeometry x="360" y="486.25" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Ag6ER-K48rdBQIFths89-1" value="Waga początkowa: -20" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="675.75" y="140" width="101.25" height="40" as="geometry" />
+          <mxGeometry x="680.75" y="160" width="101.25" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wr7h-53YmS4HrJ-Klriw-2" value="Tak" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="767" y="280" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="wr7h-53YmS4HrJ-Klriw-3" value="Nie" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="647" y="280" width="60" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
