@@ -197,11 +197,11 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
             if( dzisiejszyUVindeksWiekszyOd())
             {
-                probabilitySum += 5; // koniec 15
+                probabilitySum += 5; // koniec 25
             }
             else
             {
-                probabilitySum += -3; //koniec 7
+                probabilitySum += -3; //koniec 17
             }
         }
         else
@@ -212,38 +212,21 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
             {
                 probabilitySum += 25;
             
-            if(dzisiejszyUVindeksWiekszyOd())
-            {
-                probabilitySum += 7;
+                if(dzisiejszyUVindeksWiekszyOd())
+                {
+                    probabilitySum += -18;//koniec 18
 
-                if (srednioCieplejNiz(srStopnie))
-                {
-                    probabilitySum += -25; // koniec 47
                 }
-                else
+                 else
                 {
-                probabilitySum += 25; // koniec 97
-                }
-            }
-            else
-            {
-                probabilitySum += -5;
+                    probabilitySum += 20;//koniec 95
 
-                if (srednioCieplejNiz(srStopnie))
-                {
-                    probabilitySum += 25; // koniec 85
-                    
                 }
-                else
-                {
-                probabilitySum += -25; // koniec 35
-                }
-            }
             }
            
             else
             {
-                probabilitySum += -10; //koniec suma 30
+                probabilitySum += -10; //koniec suma 40
             }
 
         }
@@ -263,12 +246,12 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
                     if(srednioCieplejNiz(srStopnie))
                     {
-                       probabilitySum += 10;//koniec 80
+                       probabilitySum += 10;//koniec 90
                     }
                     else
                     {
                         
-                         probabilitySum += -35; //koniec 35
+                         probabilitySum += -35; //koniec 45
                     }
                 }
                 else
@@ -277,12 +260,12 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
                     
                     if(srednioCieplejNiz(srStopnie))
                     {
-                         probabilitySum += 10; //koniec 62
+                         probabilitySum += 10; //koniec 82
                         
                     }
                     else
                     {
-                       probabilitySum += -35;// koniec 27
+                       probabilitySum += -35;// koniec 37
                     }
                 }
             }
@@ -296,12 +279,12 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
                     if(srednioCieplejNiz(srStopnie))
                     {
-                        probabilitySum += 25;// koniec 85 
+                        probabilitySum += 25;// koniec 
                        
                     }
                     else
                     {
-                         probabilitySum += -25; // koniec 35
+                         probabilitySum += -25; // koniec 
                     }
                 }
                 else
@@ -314,27 +297,19 @@ bool makeWatheringDecision(DynamicJsonDocument doc, DynamicJsonDocument doc2)//(
 
                         if(srednioCieplejNiz(srStopnie))
                         {
-                            probabilitySum += 25;// koniec 84
+                            probabilitySum += 25;// koniec 
                             
                         }
                         else
                         {
-                            probabilitySum += -25; //koniec 34
+                            probabilitySum += -25; //koniec 
                         }
                     }
                     else
                     {
-                        probabilitySum += -5;
+                        probabilitySum += 20; //koniec
 
-                         if(srednioCieplejNiz(1))
-                        {
-                            probabilitySum += 25;// koniec 84
-                           
-                        }
-                        else
-                        {
-                             probabilitySum += -25; //koniec 34
-                        }
+        
                     }
                 }
             }
